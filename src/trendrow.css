@@ -1,0 +1,56 @@
+/* *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: 'Tangerine';
+    src: local('Tangerine'), url('../public/assets/OverlockSC-Regular.ttf');
+}
+.row{
+    font-family: 'Tangerine';
+    color: white;
+    position: absolute;
+    z-index: 0;
+    max-width: 100%;
+}
+.row-main {
+    max-width: 100%;
+    display: flex;
+    padding: 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; 
+  }
+.row-main::-webkit-scrollbar{
+    display: none;
+}
+.row-poster {
+    cursor: pointer;
+    border-radius: 1rem;
+    height: 20rem;
+    width: 15rem;
+    margin-right: 1.8rem;
+    transform: scale(1);
+    transition: transform 0.5s;
+  }
+.row-poster:hover{
+    transform: scale(1.1);
+    opacity: 0.89;
+} */
+.trendrow-title{
+    font-size: 3.2rem;
+    padding: 0.5rem;
+}
+
+
+@media(max-width:500px) {
+    .trendrow-title{
+        font-size: 4.1rem;
+    }
+    /* .row-poster {
+        width: 24rem;
+        height: 33rem;
+      } */
+
+}

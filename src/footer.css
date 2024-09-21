@@ -1,0 +1,132 @@
+.footer {
+    background-color: black;
+    padding: 3rem;
+    color: white;
+    position: relative;
+    border-top: 2px solid white;
+    border-radius: 3rem;
+    margin-top: auto;
+}
+
+.footer .contentWrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer .menuItems {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.footer .menuItems .menuItem {
+    transition: all ease 0.3s;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.footer .menuItems .menuItem:hover {
+    color: red;
+}
+.footer-logo{
+    display: flex;
+    margin: 0 0 0 2rem;
+    justify-content: center;
+}
+.footer-logo-title{
+    cursor: pointer;
+    font-size: 5.8rem;
+    background: rgb(10,57,240);
+    background: linear-gradient(122deg, rgba(10,57,240,0.7904411764705882) 0%, rgba(231,22,22,0.8436624649859944) 50%, rgba(150,252,69,0.8800770308123249) 100%);
+    background-clip: text;
+    color: transparent;
+    font-family: 'Tangerine';
+}
+
+@media only screen and (min-width: 768px) {
+    .footer .menuItems {
+        margin-bottom: 20px;
+        gap: 30px;
+    }
+    
+    .footer .menuItems .menuItem {
+        font-size: 16px;
+    }
+}
+
+.footer .infoText {
+    font-size: 12px;
+    line-height: 20px;
+    opacity: 0.9;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 2rem 0 2rem;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.footer .infoText1{
+    font-size: 12px;
+    opacity: 0.9;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 2rem 0 2rem;
+    display: flex;
+    height: 6rem;
+    align-items: center;
+    justify-content: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.FaStripe{
+    height: 6rem;
+    width: 9rem;
+}
+
+@media only screen and (min-width: 768px) {
+    .footer .infoText {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+    .footer .infoText1 {
+        font-size: 2rem;
+        margin: 10px 10px;
+    }
+}
+@media only screen and (min-width: 500px) {
+    .infoText1 {
+        font-size: 2rem;
+        margin: 10px 10px;
+    }
+}
+
+@media (max-width: 860px) {
+    .footer-logo-title{
+        font-size: 5rem;
+    }
+}
+
+.footer .socialIcons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.footer .socialIcons .icon {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    background-color: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+
+.footer .socialIcons .icon:hover {
+    box-shadow: 0 0 0.625em red;
+    color: white;
+}

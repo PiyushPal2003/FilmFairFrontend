@@ -1,0 +1,158 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+@font-face {
+        font-family: 'Tangerine';
+        src: local('Tangerine'), url('../public/assets/OverlockSC-Regular.ttf');
+}
+.profile-content{
+    color: white;
+    font-family: 'Tangerine';
+    margin: 12rem 4rem 0 4rem;
+    padding: 1rem;
+    /* border: 1px solid rgb(255, 255, 255);
+    border-radius: 1.2rem ; */
+    flex: 1;
+}
+.subs-info{
+    margin: 2rem 4rem 0 4rem;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.subs-info-head{
+    color: white;
+    font-family: 'Tangerine';
+    font-size: 2.6rem;
+    padding: 0 0 1.5rem 0;
+}
+.subs-content{
+    border: 2px solid red;
+    border-radius: 1.5rem;
+    padding: 2rem 6rem 4rem 6rem;
+    color: white;
+    max-width: fit-content;
+}
+.profile-status{
+    position: fixed;
+    color: white;
+    z-index: 5;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    background-color:#000000b5;
+    }
+.profile-model{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 1.8rem;
+    border: 2px solid black;
+    border-radius: 1.5rem;
+    font-family: 'Tangerine';
+    padding: 5rem 5rem;
+    width: 72rem;
+    display: none;
+    background: linear-gradient(122deg, rgb(133 9 9 / 83%) 0%, rgb(0 0 0 / 85%) 50%, rgb(146 20 20 / 82%) 100%);
+}
+/* .subs-content::before{
+    content: "Current Subscription";
+} */
+.model-tit-h{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+.model-t{
+    cursor: pointer;
+    font-size: 5rem;
+    background: rgb(10,57,240);
+    background: linear-gradient(122deg, rgba(10,57,240,0.7904411764705882) 0%, rgba(231,22,22,0.8436624649859944) 50%, rgba(150,252,69,0.8800770308123249) 100%);
+    background-clip: text;
+    color: transparent;
+    font-family: 'Tangerine';
+}
+.tier-i{
+    font-family: 'Cinzel';
+    font-weight: 100;
+    margin: 0 0 0 1rem;
+    font-size: 5.8rem;
+    color: white;
+    text-shadow: 0.1rem 0.6rem 1.2rem white;
+}
+.subs-content-dt{
+    font-family: 'Tangerine';
+    margin: 1rem;
+    font-size: 2.4rem;
+    text-decoration: underline;
+}
+.download-invoice{
+    background: #c61c1c;
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 1rem;
+    padding: 1.3rem 1.4rem 1.3rem 1.4rem;
+    cursor: pointer;
+    margin: 1.5rem 1rem 0 0;
+    font-size: 1.7rem;
+}
+.manage-billing{
+    background: #c61c1c;
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 1rem;
+    padding: 1.3rem 1.4rem 1.3rem 1.4rem;
+    cursor: pointer;
+    margin: 1.5rem 0 0 1rem;
+    font-size: 1.7rem;
+}
+.device-count-text{
+    color: white;
+    font-family: 'Tangerine';
+    margin: 5rem 0 0 0;
+    font-size: 2.6rem;
+}
+.features{
+    font-family: 'Tangerine';
+    border: 2px solid red;
+    border-radius: 1.5rem;
+    margin: 2rem 0;
+    padding: 1.5rem 5rem 1.5rem 5rem;
+    background-color: #410d0d;
+    display: none;
+}
+.profile-signin-btn{
+    background-color: red;
+    color: white;
+    border: none;
+    font-size: 2rem;
+    border-radius: 1.5rem;
+    height: 0rem;
+    padding: 1.5rem 2.3rem 3.5rem 2.3rem;
+    margin: 2.3rem 2.3em 0.3rem 0.3rem;
+    cursor: pointer;
+}
+@media (max-width: 500px) {
+    .profile-signin-btn {
+        font-size: 2.8rem;
+        padding: 2rem 2.5rem;
+        margin: 2.3rem 2.3rem 0rem 0rem;
+        background-color: red;
+        border: none;
+        cursor: pointer;
+        border-radius: 1.5rem;
+        color: white;
+    }
+}

@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+
+html{
+  font-size: 62.5%;
+  background-color: #270707;
+  padding-bottom: 0rem;
+}
+
+@media(max-width:990px) { 
+  html { font-size: 55% } }
+
+@media(max-width:760px) { 
+  html { font-size: 43% } }
+
+@media(max-width: 500px){
+  html {font-size: 30% } }

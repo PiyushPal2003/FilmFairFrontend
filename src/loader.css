@@ -1,0 +1,70 @@
+@font-face {
+    font-family: 'Tangerine';
+    src: local('Tangerine'), url('../public/assets/OverlockSC-Regular.ttf');
+}
+.loader-head{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    font-family: 'Tangerine';
+    text-align: center;
+}
+.load-tit-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.load-tit{
+    cursor: pointer;
+    font-size: 13rem;
+    background: rgb(10,57,240);
+    background: linear-gradient(122deg, rgba(10,57,240,0.7904411764705882) 0%, rgba(231,22,22,0.8436624649859944) 50%, rgba(150,252,69,0.8800770308123249) 100%);
+    background-clip: text;
+    color: transparent;
+    font-family: 'Tangerine';
+}
+.heading{
+    font-size: 5.8rem;
+    margin: 6rem 0 5rem 0;
+}
+.fact{
+    font-size: 5rem;
+    padding: 0 2.8rem;
+}
+.load-img{
+    height: 45rem;
+    margin: 0 0 1rem 0;
+}
+.message{
+    font-size: 3.5rem;
+    margin: 0rem 0;
+}
+
+
+
+@media(max-width: 500px){
+    .load-img{
+        height: 80rem;
+        margin: 0 0 5rem 0;
+    }
+    .message{
+        margin: 5rem 0;
+        font-size: 6rem;
+    }
+    .loader-head{
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: white;
+        font-family: 'Tangerine';
+        text-align: center;
+        overflow: hidden;
+    }
+}

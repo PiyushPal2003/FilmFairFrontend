@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'Tangerine';
+    src: local('Tangerine'), url('../public/assets/OverlockSC-Regular.ttf');
+}
+.activegenre{
+    color: red;
+}
+.genre-main{
+    color: white;
+    text-align: center;
+    font-family: 'Tangerine';
+}
+.genre-head{
+    padding: 12.8rem 0rem 0rem 0;
+    background: rgb(33, 26, 26);
+    border-bottom: 2px solid white;
+    border-radius: 2rem;
+    position: relative;
+}
+.genre-head::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #2707077d;
+    z-index: 0;
+}
+.genre-title{
+    font-size: 3rem;
+    color: rgb(247, 227, 227);
+    position: relative;
+    z-index: 1;
+}
+.genre-list{
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem 10rem 5rem 10rem;
+    position: relative;
+    z-index: 1;
+}
+.genre{
+    padding: 0.8rem 1rem 0.8rem 1rem;
+    border: 3px solid red;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+.genres-status{
+    position: fixed;
+    color: white;
+    z-index: 5;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    background-color:#000000b5;
+}
+.genres-model{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 1.8rem;
+    border: 2px solid black;
+    border-radius: 1.5rem;
+    font-family: 'Tangerine';
+    padding: 5rem 5rem;
+    width: 72rem;
+    display: none;
+    background: linear-gradient(122deg, rgb(133 9 9 / 83%) 0%, rgb(0 0 0 / 85%) 50%, rgb(146 20 20 / 82%) 100%);
+}
+
+
+@media(max-width: 500px){
+    .genre-title{
+        font-size: 4.5rem;
+    }
+    .genre-list{
+        margin: 1.8rem 0 0 0;
+        flex-wrap: wrap;
+    }
+    .genre{
+        margin: 1rem;
+        font-size: 3.2rem;
+    }
+}

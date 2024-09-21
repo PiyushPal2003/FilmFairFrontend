@@ -1,0 +1,81 @@
+@font-face {
+    font-family: 'Tangerine';
+    src: local('Tangerine'), url('../public/assets/OverlockSC-Regular.ttf');
+}
+
+.about-main-intro {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100vw;
+    background: linear-gradient(142deg, rgba(155,72,211,0.34226190476190477) 30%, rgba(253,29,29,0.27503501400560226) 68%, rgba(252,176,69,0.34226190476190477) 100%);
+    background-size: 300% 300%;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Tangerine';
+    animation: backgroundani 2s infinite alternate-reverse;
+}
+
+.about-intro-img {
+    position: absolute;
+    animation: about-intro 2.6s ease-in-out 1 normal forwards;
+}
+
+@keyframes about-intro {
+    0% {
+        top: 50%; /* Start from the middle */
+        height: 150rem;
+    }
+    50% {
+        top: 50%; /* Move halfway up */
+        height: 10rem;
+    }
+    /* 75%{
+        top: 25%;
+        height: 8rem;
+    } */
+    100% {
+        top: 5rem;  /* Reach the final top position */
+        height: 6rem;
+    }
+}
+@keyframes backgroundani {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.about-intro-text {
+    color: white;
+    opacity: 0;  /* Initially hidden */
+    animation: text-intro 2.6s ease-in-out 1 forwards;
+    animation-delay: 2s; /* This matches the image animation duration */
+    position: absolute; /* Keeps the text in place during animation */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8rem;
+}
+.questions{
+    margin: 4rem;
+}
+.fa{
+    margin: 0 1rem 0 0;
+    color: white;
+}
+
+@keyframes text-intro {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px); /* Small slide up effect */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* Final position */
+    }
+}
