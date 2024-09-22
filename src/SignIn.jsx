@@ -75,7 +75,8 @@ export default function Login() {
           }
           else if(res.status === 200){
             return res.json().then(data => {
-              document.cookie = `FilmFairRefresh=${data.jwt}; expires=${data.expire}; secure; samesite=Strict; path=/`;
+              const expireDate = new Date(data.expire).toUTCString();
+              document.cookie = `FilmFairRefresh=${data.jwt}; expires=${expireDate}; secure; samesite=Strict; path=/`;
               const splittoken = data.jwt? data.jwt.split("."): undefined;
               sessionStorage.setItem('FilmFairAccess', splittoken[2]);
               Swal.fire({

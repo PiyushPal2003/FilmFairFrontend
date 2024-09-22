@@ -97,7 +97,9 @@ export default function Home() {
                     .then((data)=>{
                         const token = data.jwt;
                         const split = token.split('.');
-                        document.cookie = `FilmFairRefresh=${token}; expires=${data.expire}; secure; samesite=Strict; path=/`;
+                        const expirationDuration = data.expire;
+                        const expireDate = new Date(Date.now() + expirationDuration).toUTCString();
+                        document.cookie = `FilmFairRefresh=${token}; expires=${expireDate}; secure; samesite=Strict; path=/`;
 
                         if(Object.keys(profile).length === 0){
                             dispatch(fetchprofile(data.jwt))
