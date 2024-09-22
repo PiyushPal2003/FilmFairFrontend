@@ -58,7 +58,7 @@ function Navbar() {
                 </div>
                   
                 {location.pathname !== '/search' && (
-              <h1 className='search-bar' onClick={()=>Search()}><FaSearch /><span className='search-span'><Typewriter options={{strings: ['Latest Movies', 'Series & More....'],autoStart: true, loop: true, }} /></span></h1>)}
+              <h1 className='search-bar' onClick={()=>Search()}><FaSearch style={{width:"3rem", height:"3rem"}}/><span className='search-span'>Search Movies</span></h1>)}
             <ul className='nav-items'>
               {auth? <li><Link to='/profile'>Profile</Link></li> : <li><Link to='/signup'>SignUp</Link></li>}
               <li><Link to='/wishlist'>Wishlist</Link></li>

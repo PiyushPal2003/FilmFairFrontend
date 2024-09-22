@@ -297,8 +297,21 @@ export default function Wishlist() {
 
     return (
     <div className='wishlist-main'>
-      {load? <Load/>:
-        <>
+      {load? (<>
+        
+        <div className='wish-status'>
+                <div className='wish-model'>
+                <CgInfo size={50} style={{margin: "0 0 1.5rem 0"}}/>
+                <h1 style={{color: "white"}}>It Seems You Dont Have An Active Plan</h1>
+                <h2 style={{margin: "1.5rem 0 1.5rem 0"}}>Please Purchase a Plan to Continue</h2>
+                <div className='model-tit-head'>
+                    <h1 className='model-tit'>FlimFair</h1>
+                </div>
+                </div>
+            </div>
+        <Load/>
+
+      </>):(<>
             <div className='wish-status'>
                 <div className='wish-model'>
                 <CgInfo size={50} style={{margin: "0 0 1.5rem 0"}}/>
@@ -335,7 +348,7 @@ export default function Wishlist() {
                 </div>
 
             <Footer />
-            </>
+            </>)
         }
         </div>
     )

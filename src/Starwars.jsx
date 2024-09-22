@@ -16,7 +16,6 @@ export default function Starwars() {
     })
 
     function fetchdata(){
-        console.log("Fetching Pixar Data From Redux");
         const StarWarsSeries = apidt.filter(item => item.cat === "StarWars Series");
         const StarWarsMovies = apidt.filter(item => item.cat === "StarWars Movies");
         const StarWarsShorts = apidt.filter(item => item.cat === "StarWars Shorts");

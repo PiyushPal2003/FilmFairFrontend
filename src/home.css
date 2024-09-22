@@ -47,9 +47,13 @@
 }
 .arrow-left{
     left: 2rem;
+    width: 2.6rem;
+    height: 2.6rem;
 }
 .arrow-right{
     right: 2rem;
+    width: 2.6rem;
+    height: 2.6rem;
 }
 .fade{
     position: absolute;
@@ -83,7 +87,7 @@
     cursor: pointer;
     border: 2px solid white;
     outline: none;
-    font-size: 1.4rem;
+    font-size: 2.1rem;
     padding: 1rem;
     border-radius: 0.5rem;
     background-color: transparent;
@@ -288,6 +292,16 @@
         display: flex;
         flex-direction: column;
     } */
+    .arrow-left{
+        left: 2rem;
+        width: 3rem;
+        height: 3rem;
+    }
+    .arrow-right{
+        right: 2rem;
+        width: 3rem;
+        height: 3rem;
+    }
     .model-tit-head{
         display: flex;
         flex-direction: column;

@@ -16,7 +16,6 @@ export default function Marvel() {
     })
 
     function fetchdata(){
-        console.log("Fetching Pixar Data From Redux");
         const MarvelCenematicUniverse = apidt.filter(item => item.cat === "Marvel Cenematic Universe");
         const MarvelUniversePhase3 = apidt.filter(item => item.cat === "Marvel Universe Phase3");
         const MarvelUniversePhase4 = apidt.filter(item => item.cat === "Marvel Universe Phase4");

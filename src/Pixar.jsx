@@ -16,7 +16,6 @@ export default function Pixar() {
     })
 
     function fetchdata(){
-        console.log("Fetching Pixar Data From Redux");
         const PixarOriginals = apidt.filter(item => item.cat === "Pixar Originals");
         const PixarMovies = apidt.filter(item => item.cat === "Pixar Movies");
         const PixarShorts = apidt.filter(item => item.cat === "Pixar Shorts");

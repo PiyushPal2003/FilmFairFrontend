@@ -16,7 +16,6 @@ export default function Disney() {
     })
   
     function fetchdata(){
-        console.log("Fetching Disney Data From Redux");
         const DisneyAction = apidt.filter(item => item.cat === "Disney Action");
         const DisneyAnimated = apidt.filter(item => item.cat === "Disney Animated");
         const DisneyOriginals = apidt.filter(item => item.cat === "Disney Originals");

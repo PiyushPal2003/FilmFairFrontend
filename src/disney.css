@@ -34,3 +34,11 @@
     opacity: 0.2;
     transition: opacity 1s;
 }
+
+@media(max-width:500px) {
+    .disney-row-poster{
+        width: 51rem;
+        height: 26rem;
+    }
+
+}
