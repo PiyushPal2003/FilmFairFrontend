@@ -59,7 +59,7 @@ export default function Login() {
   
       fetch("https://filmfairserver.vercel.app/user_signin", {
           method: "POST",
-          body: JSON.stringify(data),
+          body: JSON.stringify(user),
           headers: {
               'Content-Type': 'application/json',
           },
