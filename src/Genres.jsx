@@ -7,7 +7,7 @@ import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import Footer from './Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchdt } from './features/apiSlice';
-import { updateFingerprint, fetchprofile } from './features/profileSlice';
+import { updateAuth, updateFingerprint, fetchprofile } from './features/profileSlice';
 import { CgInfo } from "react-icons/cg";
 
 export default function Genres() {
@@ -74,11 +74,13 @@ export default function Genres() {
                                       body:JSON.stringify({visitorId, id})
                                     }).then((res)=>{
                                       if(res.status==200){
+                                        sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                         dispatch(updateFingerprint(visitorId))
                                         console.log(visitorId);
                                       } else if(res.status==400){
                                         document.getElementsByClassName("genres-status")[0].style.display="flex";
                                         document.getElementsByClassName("genres-model")[0].style.display="flex";
+                                        dispatch(updateAuth())
                                         resolve(false);
                                         return
                                       }
@@ -86,7 +88,6 @@ export default function Genres() {
                                   }
                                   setFp();
 
-                                sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                 resolve(true);
                             })  
                         }
@@ -109,11 +110,13 @@ export default function Genres() {
                                   body:JSON.stringify({visitorId, id})
                                 }).then((res)=>{
                                   if(res.status==200){
+                                    sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                     dispatch(updateFingerprint(visitorId))
                                     console.log(visitorId);
                                   } else if(res.status==400){
                                     document.getElementsByClassName("genres-status")[0].style.display="flex";
                                     document.getElementsByClassName("genres-model")[0].style.display="flex";
+                                    dispatch(updateAuth())
                                     resolve(false);
                                     return
                                   }
@@ -121,7 +124,6 @@ export default function Genres() {
                               }
                             setFp();
 
-                            sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                             resolve(true);
                         })
                         setData(apidt);
@@ -174,6 +176,7 @@ export default function Genres() {
                               } else if(res.status==400){
                                 document.getElementsByClassName("genres-status")[0].style.display="flex";
                                 document.getElementsByClassName("genres-model")[0].style.display="flex";
+                                dispatch(updateAuth())
                                 resolve(false);
                                 return
                               }
@@ -181,7 +184,6 @@ export default function Genres() {
                           }
                         setFp();
 
-                        sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                         resolve(true);
                     })  
                 }
@@ -209,6 +211,7 @@ export default function Genres() {
                           } else if(res.status==400){
                             document.getElementsByClassName("genres-status")[0].style.display="flex";
                             document.getElementsByClassName("genres-model")[0].style.display="flex";
+                            dispatch(updateAuth())
                             resolve(false);
                             return
                           }
@@ -216,7 +219,6 @@ export default function Genres() {
                       }
                     setFp();
 
-                    sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                     resolve(true);
                 })
                 setData(apidt);

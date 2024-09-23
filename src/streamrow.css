@@ -45,8 +45,8 @@
 }
 .now-stream{
     display: inline-block;
-    font-size: 2.8rem;
-    padding: 1rem 0.5rem;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
     margin: 0 0 0 1rem;
     border: 2px solid gold;
     border-radius: 2rem;
@@ -57,8 +57,8 @@
 .now-stream::before{
     content: "";
     position: absolute;
-    width: 2rem;
-    height: 0.39rem;
+    width: 1.2rem;
+    height: 0.35rem;
     background: rgb(255, 255, 255);
     left: 73%;
     top: -0.26rem;
@@ -68,10 +68,10 @@
 .now-stream::after{
     content: "";
     position: absolute;
-    top: -0.24rem;
+    top: -0.19rem;
     width: 5.5rem;
-    height: 0.3rem;
-    left: 54%;
+    height: 0.22rem;
+    left: 56%;
     border-radius: 30%;
     background: linear-gradient(320deg, rgba(210, 196, 170, 0) 0%, rgb(255, 252, 244) 50.49%, rgba(226, 226, 226, 0) 100%);
 }
@@ -117,6 +117,17 @@
     .stream-top-rated-row-poster{
         width: 51rem;
         height: 26rem;
+    }
+    .now-stream{
+        display: inline-block;
+        font-size: 2.4rem;
+        padding: 0.6rem 1rem 0.5rem 1rem;
+        margin: 0 0 0 1rem;
+        border: 2px solid gold;
+        border-radius: 3rem;
+        position: relative;
+        color: gold;
+        font-family: 'Tangerine';
     }
     .now-stream::after{
         content: "";

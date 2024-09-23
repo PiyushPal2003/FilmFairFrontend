@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { CgInfo } from "react-icons/cg";
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from './Footer';
-import { updateFingerprint, fetchprofile } from './features/profileSlice';
+import { updateAuth, updateFingerprint, fetchprofile } from './features/profileSlice';
 
 export default function Moviedetail() {
 
@@ -57,13 +57,11 @@ export default function Moviedetail() {
             if(!res.ok){
                 document.getElementsByClassName("Login-status")[0].style.display="flex";
                 document.getElementsByClassName("login-model")[0].style.display="flex";
-                
                 resolve(false);
             } else{
                 dispatch(fetchprofile(cookieValue))
                 .then((res)=>{
                   if (res.meta.requestStatus === 'fulfilled') {
-                    sessionStorage.setItem('FilmFairAccess', splittoken[2]);
 
                       const setFp = async () => {
                         const fp = await FingerprintJS.load();
@@ -77,11 +75,13 @@ export default function Moviedetail() {
                           body:JSON.stringify({visitorId, id})
                         }).then((res)=>{
                           if(res.status==200){
+                            sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                             dispatch(updateFingerprint(visitorId))
                             console.log(visitorId);
                           } else if(res.status==400){
                             document.getElementsByClassName("Login-status")[0].style.display = "flex";
                             document.getElementsByClassName("login-model")[0].style.display = "flex";
+                            dispatch(updateAuth())
                             resolve(false);
                             return
                           }
@@ -109,7 +109,6 @@ export default function Moviedetail() {
         if(!res.ok){
           document.getElementsByClassName("Login-status")[0].style.display = "flex";
           document.getElementsByClassName("login-model")[0].style.display = "flex";
-          ;
           resolve(false);
         } else{
           
@@ -135,6 +134,7 @@ export default function Moviedetail() {
                     } else if(res.status==400){
                       document.getElementsByClassName("Login-status")[0].style.display = "flex";
                       document.getElementsByClassName("login-model")[0].style.display = "flex";
+                      dispatch(updateAuth())
                       resolve(false);
                       return
                     }

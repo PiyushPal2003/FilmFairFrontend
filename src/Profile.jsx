@@ -47,7 +47,6 @@ export default function Profile() {
             } else{
                 dispatch(fetchprofile(cookieValue))
                 .then((data) => {
-                  setData(data.payload.data);
 
                   const setFp = async () => {
                     const fp = await FingerprintJS.load();
@@ -61,20 +60,20 @@ export default function Profile() {
                       body:JSON.stringify({visitorId, id})
                     }).then((res)=>{
                       if(res.status==200){
+                        setData(data.payload.data);
+                        sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                         dispatch(updateFingerprint(visitorId))
-                        
                         console.log(visitorId);
                       } else if(res.status==400){
                         document.getElementsByClassName("profile-status")[0].style.display="flex";
                         document.getElementsByClassName("profile-model")[0].style.display="flex";
-                        
+                        dispatch(updateAuth())
                         return false;
                       }
                     })
                   }
-                setFp();
+                  setFp();
 
-                  sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                   if(data.payload.data.Subscription.amtPaid==900){
                     planameRef.current.innerText = 'Basic';
                     document.getElementById("features1").setAttribute("style","display:inline-block;")
@@ -95,7 +94,6 @@ export default function Profile() {
       } else if (accessToken && authCookie) {
         dispatch(fetchprofile(checktoken))
           .then((data) => {
-            setData(data.payload.data);
 
             const setFp = async () => {
               const fp = await FingerprintJS.load();
@@ -109,19 +107,18 @@ export default function Profile() {
                 body:JSON.stringify({visitorId, id})
               }).then((res)=>{
                 if(res.status==200){
+                  setData(data.payload.data);
                   dispatch(updateFingerprint(visitorId))
-                  
                   console.log(visitorId);
                 } else if(res.status==400){
                   document.getElementsByClassName("profile-status")[0].style.display="flex";
                   document.getElementsByClassName("profile-model")[0].style.display="flex";
-                  
+                  dispatch(updateAuth())
                   return false;
                 }
               })
             }
             setFp();
-            sessionStorage.setItem('FilmFairAccess', splittoken[2]);
 
             if(data.payload.data.Subscription.amtPaid==900){
               planameRef.current.innerText = 'Basic';

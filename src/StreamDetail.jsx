@@ -5,7 +5,7 @@ import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import { useParams } from 'react-router-dom';
 import { CgInfo } from "react-icons/cg";
 import { useDispatch, useSelector } from 'react-redux';
-import { updateFingerprint, fetchprofile } from './features/profileSlice';
+import { updateAuth, updateFingerprint, fetchprofile } from './features/profileSlice';
 import Navbar from './Navbar';
 import VideoPlayer from './VideoPlayer';
 import Footer from './Footer';
@@ -95,7 +95,6 @@ export default function StreamDetail() {
                   dispatch(fetchprofile(cookieValue))
                   .then((res)=>{
                     if (res.meta.requestStatus === 'fulfilled') {
-                      sessionStorage.setItem('FilmFairAccess', splittoken[2]);
   
                         const setFp = async () => {
                           const fp = await FingerprintJS.load();
@@ -109,11 +108,13 @@ export default function StreamDetail() {
                             body:JSON.stringify({visitorId, id})
                           }).then((res)=>{
                             if(res.status==200){
+                              sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                               dispatch(updateFingerprint(visitorId))
                               console.log(visitorId);
                             } else if(res.status==400){
                               document.getElementsByClassName("Login-status")[0].style.display = "flex";
                               document.getElementsByClassName("login-model")[0].style.display = "flex";
+                              dispatch(updateAuth())
                               resolve(false);
                               return
                             }
@@ -165,6 +166,7 @@ export default function StreamDetail() {
                       } else if(res.status==400){
                         document.getElementsByClassName("Login-status")[0].style.display = "flex";
                         document.getElementsByClassName("login-model")[0].style.display = "flex";
+                        dispatch(updateAuth())
                         resolve(false);
                         return
                       }

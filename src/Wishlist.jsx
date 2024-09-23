@@ -4,7 +4,7 @@ import Footer from './Footer';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchdt } from './features/apiSlice'
-import { updateFingerprint, fetchprofile } from './features/profileSlice';
+import { updateAuth, updateFingerprint, fetchprofile } from './features/profileSlice';
 import { CgInfo } from "react-icons/cg";
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import Navbar from './Navbar';
@@ -76,11 +76,13 @@ export default function Wishlist() {
                                       body:JSON.stringify({visitorId, id})
                                     }).then((res)=>{
                                       if(res.status==200){
+                                        sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                         dispatch(updateFingerprint(visitorId))
                                         console.log(visitorId);
                                       } else if(res.status==400){
                                         document.getElementsByClassName("wish-status")[0].style.display="flex";
                                         document.getElementsByClassName("wish-model")[0].style.display="flex";
+                                        dispatch(updateAuth())
                                         resolve(false);
                                         return
                                       }
@@ -88,8 +90,6 @@ export default function Wishlist() {
                                   }
                                 setFp();
 
-                                sessionStorage.setItem('FilmFairAccess', splittoken[2]);
-                                
                                 resolve(true);
                             })  
                         }
@@ -114,11 +114,13 @@ export default function Wishlist() {
                                   body:JSON.stringify({visitorId, id})
                                 }).then((res)=>{
                                   if(res.status==200){
+                                    sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                     dispatch(updateFingerprint(visitorId))
                                     console.log(visitorId);
                                   } else if(res.status==400){
                                     document.getElementsByClassName("wish-status")[0].style.display="flex";
                                     document.getElementsByClassName("wish-model")[0].style.display="flex";
+                                    dispatch(updateAuth())
                                     resolve(false);
                                     return
                                   }
@@ -126,8 +128,6 @@ export default function Wishlist() {
                               }
                             setFp();
 
-                            sessionStorage.setItem('FilmFairAccess', splittoken[2]);
-                            
                             resolve(true);
                         })
                     }
@@ -158,20 +158,17 @@ export default function Wishlist() {
                             }).then((res)=>{
                               if(res.status==200){
                                 dispatch(updateFingerprint(visitorId))
-                                
                                 console.log(visitorId);
                               } else if(res.status==400){
                                 document.getElementsByClassName("wish-status")[0].style.display="flex";
                                 document.getElementsByClassName("wish-model")[0].style.display="flex";
-                                
+                                dispatch(updateAuth())
                                 resolve(false);
                                 return
                               }
                             })
                           }
                         setFp();
-
-                        sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                         
                         resolve(true);
                     })  
@@ -198,20 +195,17 @@ export default function Wishlist() {
                         }).then((res)=>{
                           if(res.status==200){
                             dispatch(updateFingerprint(visitorId))
-                            
                             console.log(visitorId);
                           } else if(res.status==400){
                             document.getElementsByClassName("wish-status")[0].style.display="flex";
                             document.getElementsByClassName("wish-model")[0].style.display="flex";
-                            
+                            dispatch(updateAuth())
                             resolve(false);
                             return
                           }
                         })
                       }
                     setFp();
-
-                    sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                     
                     resolve(true);
                 })

@@ -10,7 +10,7 @@ import StreamRow from './StreamRow';
 import Loading from './Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchdt } from './features/apiSlice'
-import { updateFingerprint, fetchprofile } from './features/profileSlice';
+import { updateAuth, updateFingerprint, fetchprofile } from './features/profileSlice';
 
 
 export default function Home() {
@@ -120,36 +120,87 @@ export default function Home() {
             })
         }
         else if(authCookie && !accessToken){
-            if(Object.keys(profile).length === 0){
-                dispatch(fetchprofile(cookieValue))
-                .then((data)=>{
-
-                    const setFp = async () => {
-                        const fp = await FingerprintJS.load();
-                        const { visitorId } = await fp.get();
-                        console.log(visitorId);
-                        dispatch(updateFingerprint(visitorId))
-                      };
-                  
-                    setFp();
-                })
-            }
-            sessionStorage.setItem('FilmFairAccess', splittoken[2]);
+            fetch("https://filmfairserver.vercel.app/verifyjwt", {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${cookieValue}`
+                },
+                body: JSON.stringify()
+            }).then((res)=>{
+                if(res.ok){
+                    if(Object.keys(profile).length === 0){
+                        dispatch(fetchprofile(cookieValue))
+                        .then((res)=>{
+                            if (res.meta.requestStatus === 'fulfilled') {
+                                const setFp = async () => {
+                                    const fp = await FingerprintJS.load();
+                                    const { visitorId } = await fp.get();
+                                    const id=res.payload.data._id;
+            
+                                    fetch('https://filmfairserver.vercel.app/verifyfingerprint', {
+                                      method: "POST",
+                                      headers: {
+                                        "Content-Type":"application/json" },
+                                      body:JSON.stringify({visitorId, id})
+                                    }).then((res)=>{
+                                      if(res.status==200){
+                                        sessionStorage.setItem('FilmFairAccess', splittoken[2]);
+                                        dispatch(updateFingerprint(visitorId))
+                                        console.log(visitorId);
+                                      } else if(res.status==400){
+                                        dispatch(updateAuth())
+                                        return
+                                      }
+                                    })
+                                };
+                                setFp();
+                            }
+                        })
+                    }
+                }
+            })
         }
-        else if (authCookie && accessToken) { //only cookie present, no sessionID -{OR}- cookie and sessionID present 
-            if(Object.keys(profile).length === 0){
-                dispatch(fetchprofile(checktoken))
-                .then((data)=>{
-                    const setFp = async () => {
-                        const fp = await FingerprintJS.load();
-                        const { visitorId } = await fp.get();
-                        console.log(visitorId);
-                        dispatch(updateFingerprint(visitorId))
-                      };
+        else if (authCookie && accessToken) {
+            fetch("https://filmfairserver.vercel.app/verifyjwt", {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${checktoken}`
+                },
+              }).then((res)=>{
+                if(res.ok){
+                    if(Object.keys(profile).length === 0){
+                        dispatch(fetchprofile(checktoken))
+                        .then((res)=>{
+                            if (res.meta.requestStatus === 'fulfilled') {
+                                const setFp = async () => {
+                                    const fp = await FingerprintJS.load();
+                                    const { visitorId } = await fp.get();
+                                    const id=res.payload.data._id;
                   
-                    setFp();
-                })
-            }
+                                    fetch('https://filmfairserver.vercel.app/verifyfingerprint', {
+                                      method: "POST",
+                                      headers: {
+                                        "Content-Type":"application/json" },
+                                      body:JSON.stringify({visitorId, id})
+                                    }).then((res)=>{
+                                      if(res.status==200){
+                                        dispatch(updateFingerprint(visitorId))
+                                        console.log(visitorId);
+                                      } else if(res.status==400){
+                                        dispatch(updateAuth())
+                                        resolve(false);
+                                        return
+                                      }
+                                    })
+                                }
+                                setFp();
+                            }
+                        })
+                    }
+                }
+            })
         }
         else{ // user with nothing
             console.log("Guest User")
@@ -176,7 +227,11 @@ export default function Home() {
         <div>
             {aloading ? (<>
                 <Loading/> 
-                <div className='payment-status'>
+            </>
+            ):( 
+            <>
+            
+            <div className='payment-status'>
                     <div className='pay-st-content-fail'>
                         <RxCross1 size={22} style={{cursor: "pointer",position: "relative", padding: "0.5rem", border:"1px solid white",borderRadius: "2rem"}} onClick={modeltoggle}/>
                         <img src='./assets/fail.png' className='success-img' loading='lazy'/>
@@ -197,13 +252,11 @@ export default function Home() {
                         <h5 className='pay-st-2'>Please Head over to Profile-&gt;Manage Billing  for more Information</h5>
                     </div>
                 </div>
-            </>
-            ):( 
-            <>
+
             <Navbar />
+            
             <div className='home-main'>
                 
-
                 <div className='carousel'>
                     <BsArrowLeftCircleFill className='arrow arrow-left' onClick={prevSlide}/>
                     {banner.map((item, idx)=>{
@@ -219,28 +272,6 @@ export default function Home() {
                         </div>)
                     })}
                     <BsArrowRightCircleFill className='arrow arrow-right' onClick={nextSlide}/>
-                </div>
-
-                <div className='payment-status'>
-                    <div className='pay-st-content-fail'>
-                        <RxCross1 size={22} style={{cursor: "pointer",position: "relative", padding: "0.5rem", border:"1px solid white",borderRadius: "2rem"}} onClick={modeltoggle}/>
-                        <img src='./assets/fail.png' className='success-img' loading='lazy'/>
-                        <h2 className='pay-st-1'>Transaction Failed !!</h2>
-                        <h5 className='pay-st-2'>Please Contact FilmFair if any Amount has been Debited</h5>
-                    </div>
-
-
-                    <div className='pay-st-content-success'>
-                        <RxCross1 size={22} style={{cursor: "pointer",position: "relative", padding: "0.5rem", border:"1px solid white",borderRadius: "2rem"}} onClick={modeltoggle}/>
-                        <img src='./assets/success.png' className='success-img' loading='lazy'/>
-                        <div className='pay-head'>
-                            <div className='model-tit-head'>
-                                <h1 className='model-tit'>FlimFair</h1><h2 className='tier-info' ref={planameRef}>Premium</h2>
-                            </div>
-                        </div>
-                        <h2 className='pay-st-1'>Transaction Successfull !!</h2>
-                        <h5 className='pay-st-2'>Please Head over to Profile-&gt;Manage Billing  for more Information</h5>
-                    </div>
                 </div>
 
                 <StreamRow />

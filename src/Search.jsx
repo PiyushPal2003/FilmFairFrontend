@@ -4,8 +4,8 @@ import './search.css';
 import { FaSearch } from "react-icons/fa";
 import { BiInfoCircle } from "react-icons/bi";
 import { CgInfo } from "react-icons/cg";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchprofile } from './features/profileSlice';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { updateAuth, updateFingerprint, fetchprofile } from './features/profileSlice';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -14,11 +14,11 @@ function Search() {
     const [data, setData] = useState([]);
     const [oops, setOops] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
-    const dispatch = useDispatch();
-    const { profile, auth } = useSelector((state) => state.profile);
+    // const dispatch = useDispatch();
+    // const { profile, auth } = useSelector((state) => state.profile);
     const [loadingStatus, setLoadingStatus] = useState({});
 
-    let cookieValue;
+    //let cookieValue;
 
     function fetchdata(){
             fetch(`https://filmfairserver.vercel.app/api?search=${query}`)
@@ -31,44 +31,113 @@ function Search() {
             })
     }
 
-    function authstatus(){
-        let accessToken = sessionStorage.getItem('FilmFairAccess');
-        const authCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('FilmFairRefresh='));
-        cookieValue = authCookie ? authCookie.split('=')[1] : undefined;
+    // function authstatus(){
+    //     let accessToken = sessionStorage.getItem('FilmFairAccess');
+    //     const authCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('FilmFairRefresh='));
+    //     cookieValue = authCookie ? authCookie.split('=')[1] : undefined;
 
-        const splittoken = cookieValue? cookieValue.split("."): undefined;
-        const prevhalftoken = splittoken? splittoken[0]+'.'+splittoken[1]: undefined;
-        const checktoken = prevhalftoken? prevhalftoken + '.' + accessToken: undefined;
+    //     const splittoken = cookieValue? cookieValue.split("."): undefined;
+    //     const prevhalftoken = splittoken? splittoken[0]+'.'+splittoken[1]: undefined;
+    //     const checktoken = prevhalftoken? prevhalftoken + '.' + accessToken: undefined;
 
-        if(!authCookie){
-            console.log("Unauthorized")
-            document.getElementsByClassName("search-status")[0].style.display="flex";
-            document.getElementsByClassName("search-model")[0].style.display="flex";
-        }
-        else if(!accessToken && authCookie){
-            fetch("https://filmfairserver.vercel.app/verifyjwt", {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${cookieValue}`
-                },
-                body: JSON.stringify()
-            }).then((res)=>{
-                if(!res.ok){
-                    console.log("Unauthorized")
-                    document.getElementsByClassName("search-status")[0].style.display="flex";
-                    document.getElementsByClassName("search-model")[0].style.display="flex";
-                } else{
-                    dispatch(fetchprofile(cookieValue))
-                    sessionStorage.setItem('FilmFairAccess', splittoken[2]);
-                }
-            })
-
-        }
-        else if(accessToken && authCookie){
+    //     if(!authCookie){
+    //         console.log("Unauthorized")
+    //         document.getElementsByClassName("search-status")[0].style.display="flex";
+    //         document.getElementsByClassName("search-model")[0].style.display="flex";
+    //     }
+    //     else if(!accessToken && authCookie){
+    //         fetch("https://filmfairserver.vercel.app/verifyjwt", {
+    //             method: 'POST',
+    //             headers: {
+    //             'Content-Type': 'application/json',
+    //             Authorization: `Bearer ${cookieValue}`
+    //             },
+    //             body: JSON.stringify()
+    //         }).then((res)=>{
+    //             if(!res.ok){
+    //                 console.log("Unauthorized")
+    //                 document.getElementsByClassName("search-status")[0].style.display="flex";
+    //                 document.getElementsByClassName("search-model")[0].style.display="flex";
+    //             } else{
+    //                 if(Object.keys(profile).length === 0){
+    //                     dispatch(fetchprofile(cookieValue))
+    //                     .then((res)=>{
+    //                         if (res.meta.requestStatus === 'fulfilled') {
+    //                             const setFp = async () => {
+    //                                 const fp = await FingerprintJS.load();
+    //                                 const { visitorId } = await fp.get();
+    //                                 const id=res.payload.data._id;
             
-        }
-    }
+    //                                 fetch('https://filmfairserver.vercel.app/verifyfingerprint', {
+    //                                   method: "POST",
+    //                                   headers: {
+    //                                     "Content-Type":"application/json" },
+    //                                   body:JSON.stringify({visitorId, id})
+    //                                 }).then((res)=>{
+    //                                   if(res.status==200){
+    //                                     sessionStorage.setItem('FilmFairAccess', splittoken[2]);
+    //                                     dispatch(updateFingerprint(visitorId))
+    //                                     console.log(visitorId);
+    //                                   } else if(res.status==400){
+    //                                     document.getElementsByClassName("search-status")[0].style.display="flex";
+    //                                     document.getElementsByClassName("search-model")[0].style.display="flex";
+    //                                     dispatch(updateAuth())
+    //                                     return
+    //                                   }
+    //                                 })
+    //                             };
+    //                             setFp();
+    //                         }
+    //                     })}
+    //             }
+    //         })
+
+    //     }
+    //     else if(accessToken && authCookie){
+    //         fetch("https://filmfairserver.vercel.app/verifyjwt", {
+    //             method: 'POST',
+    //             headers: {
+    //             'Content-Type': 'application/json',
+    //             Authorization: `Bearer ${checktoken}`
+    //             },
+    //           }).then((res)=>{
+    //             if(!res.ok){
+    //                 document.getElementsByClassName("search-status")[0].style.display="flex";
+    //                 document.getElementsByClassName("search-model")[0].style.display="flex";
+    //               resolve(false);
+    //             } else{
+    //                 if(Object.keys(profile).length <= 0){
+    //                     dispatch(fetchprofile(checktoken))
+    //                     .then((res)=>{
+    //                       if (res.meta.requestStatus === 'fulfilled') {
+    //                         const setFp = async () => {
+    //                             const fp = await FingerprintJS.load();
+    //                             const { visitorId } = await fp.get();
+    //                             const id=res.payload.data._id;
+              
+    //                             fetch('https://filmfairserver.vercel.app/verifyfingerprint', {
+    //                               method: "POST",
+    //                               headers: {
+    //                                 "Content-Type":"application/json" },
+    //                               body:JSON.stringify({visitorId, id})
+    //                             }).then((res)=>{
+    //                               if(res.status==200){
+    //                                 dispatch(updateFingerprint(visitorId))
+    //                                 console.log(visitorId);
+    //                               } else if(res.status==400){
+    //                                 document.getElementsByClassName("search-status")[0].style.display="flex";
+    //                                 document.getElementsByClassName("search-model")[0].style.display="flex";
+    //                                 dispatch(updateAuth())
+    //                                 resolve(false);
+    //                                 return
+    //                               }
+    //                             })
+    //                         }
+    //                         setFp();
+    //                       }})}
+    //             }})
+    //     }
+    // }
 
     const handleImageLoaded = (id) => {
         setLoadingStatus((prevState) => ({
@@ -86,8 +155,8 @@ function Search() {
 
 
     useEffect(()=>{
-        if(!auth){
-            authstatus(); }
+        // if(!auth){
+        //     authstatus(); }
     }, [])
 
     useEffect(() => {
