@@ -174,7 +174,31 @@ export default function Home() {
     
     return (
         <div>
-            {aloading ? <Loading/> :
+            {aloading ? (<>
+                <Loading/> 
+                <div className='payment-status'>
+                    <div className='pay-st-content-fail'>
+                        <RxCross1 size={22} style={{cursor: "pointer",position: "relative", padding: "0.5rem", border:"1px solid white",borderRadius: "2rem"}} onClick={modeltoggle}/>
+                        <img src='./assets/fail.png' className='success-img' loading='lazy'/>
+                        <h2 className='pay-st-1'>Transaction Failed !!</h2>
+                        <h5 className='pay-st-2'>Please Contact FilmFair if any Amount has been Debited</h5>
+                    </div>
+
+
+                    <div className='pay-st-content-success'>
+                        <RxCross1 size={22} style={{cursor: "pointer",position: "relative", padding: "0.5rem", border:"1px solid white",borderRadius: "2rem"}} onClick={modeltoggle}/>
+                        <img src='./assets/success.png' className='success-img' loading='lazy'/>
+                        <div className='pay-head'>
+                            <div className='model-tit-head'>
+                                <h1 className='model-tit'>FlimFair</h1><h2 className='tier-info' ref={planameRef}>Premium</h2>
+                            </div>
+                        </div>
+                        <h2 className='pay-st-1'>Transaction Successfull !!</h2>
+                        <h5 className='pay-st-2'>Please Head over to Profile-&gt;Manage Billing  for more Information</h5>
+                    </div>
+                </div>
+            </>
+            ):( 
             <>
             <Navbar />
             <div className='home-main'>
@@ -222,7 +246,7 @@ export default function Home() {
                 <StreamRow />
                 
             </div>
-            </>
+            </>)
         }
         </div>
     )
