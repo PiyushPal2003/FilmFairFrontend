@@ -83,35 +83,42 @@ export default function Home() {
             })
             .then(res=>res.json())
             .then((data)=>{ //data.subscription = UseRef to change the plan type  || when using thr customer portal 
-                planameRef.current.innerText = data.subscription;
                 if(data.status=="paid"){
-                    fetch('https://filmfairserver.vercel.app/generatejwt', {// display payment SUCCESS OR FAILURE
-                    method: "POST",
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({sessionID}),
-                    credentials: "include",
-                    })
-                    .then(res=>res.json())
-                    .then((data)=>{
-                        const token = data.jwt;
-                        const split = token.split('.');
-                        const expirationDuration = data.expire;
-                        const expireDate = new Date(Date.now() + expirationDuration).toUTCString();
-                        document.cookie = `FilmFairRefresh=${token}; expires=${expireDate}; secure; samesite=Strict; path=/`;
+                    const ab=data;
+                    const setFp = async () => {
+                        const fp = await FingerprintJS.load();
+                        const { visitorId } = await fp.get();
 
-                        if(Object.keys(profile).length === 0){
-                            dispatch(fetchprofile(data.jwt))
-                            .then((data)=>{
-                                dispatch(updateFingerprint(fingerpri))
+                        fetch('https://filmfairserver.vercel.app/generatejwt', {// display payment SUCCESS OR FAILURE
+                            method: "POST",
+                            headers: {
+                              'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({sessionID, visitorId}),
+                            credentials: "include",
                             })
-                        }
-                        sessionStorage.setItem('FilmFairAccess', split[2]);
-                    })
-
-                    document.getElementsByClassName("payment-status")[0].style.display="flex";
-                    document.getElementsByClassName("pay-st-content-success")[0].style.display="flex";
+                            .then(res=>res.json())
+                            .then((data)=>{
+                                const token = data.jwt;
+                                const split = token.split('.');
+                                const expirationDuration = data.expire;
+                                const expireDate = new Date(Date.now() + expirationDuration).toUTCString();
+                                document.cookie = `FilmFairRefresh=${token}; expires=${expireDate}; secure; samesite=Strict; path=/`;
+        
+                                if(Object.keys(profile).length === 0){
+                                    dispatch(fetchprofile(data.jwt))
+                                    .then((data)=>{
+                                        dispatch(updateFingerprint(fingerpri))
+                                    })
+                                }
+                                planameRef.current.innerText = ab.subscription;
+                                sessionStorage.setItem('FilmFairAccess', split[2]);
+                                
+                                document.getElementsByClassName("payment-status")[0].style.display="flex";
+                                document.getElementsByClassName("pay-st-content-success")[0].style.display="flex";
+                            })
+                    }
+                    setFp();
                 }
                 else if(data.status=="unpaid"){
                     document.getElementsByClassName("payment-status")[0].style.display="flex";

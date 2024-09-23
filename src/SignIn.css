@@ -184,4 +184,18 @@
     .inp-box1{
         background-color: #00000000;
     }
+    .swal2-modal{
+        width: 75rem;
+        height: 65rem;
+        font-size: 3rem;
+    }
+    .swal2-title{
+        padding: 0em 1em 0;
+    }
+    .swal2-html-container{
+        margin: 0 1em 0;
+        font-size: 3.5rem;
+    }
+
+
 }

@@ -107,6 +107,7 @@
     align-items: center;
     justify-content: center;
     display: none;
+    background: #3c30308c;
 }
 .pay-st-content-success{
     position: relative;
