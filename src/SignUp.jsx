@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import ClipLoader from "react-spinners/ClipLoader";
 import bcrypt from 'bcryptjs';
+import FingerprintJS from '@fingerprintjs/fingerprintjs';
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ export default function SignUp() {
 
   const {register, handleSubmit, formState: { errors }} = useForm()
   
+  const [fingerprint, setFingerprint] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [userid, setUserid] = useState("");
   const [subs, setSubs]= useState(false);
@@ -118,8 +120,21 @@ export default function SignUp() {
         .then((data)=>{
           setIsSubscribing(false);
             sessionStorage.setItem('sessionID', data.sesid);
+            sessionStorage.setItem('UserFingerprint', fingerprint);
             window.location.href = data.url; })
   }
+
+  useEffect(()=>{
+    const setFp = async () => {
+      const fp = await FingerprintJS.load();
+
+      const { visitorId } = await fp.get();
+      console.log(visitorId);
+      setFingerprint(visitorId);
+    };
+
+    setFp();
+  }, [])
 
   
 

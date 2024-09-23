@@ -85,9 +85,6 @@ export default function Home() {
             .then((data)=>{ //data.subscription = UseRef to change the plan type  || when using thr customer portal 
                 if(data.status=="paid"){
                     const ab=data;
-                    const setFp = async () => {
-                        const fp = await FingerprintJS.load();
-                        const { visitorId } = await fp.get();
 
                         fetch('https://filmfairserver.vercel.app/generatejwt', {// display payment SUCCESS OR FAILURE
                             method: "POST",
@@ -117,8 +114,6 @@ export default function Home() {
                                 document.getElementsByClassName("payment-status")[0].style.display="flex";
                                 document.getElementsByClassName("pay-st-content-success")[0].style.display="flex";
                             })
-                    }
-                    setFp();
                 }
                 else if(data.status=="unpaid"){
                     document.getElementsByClassName("payment-status")[0].style.display="flex";
