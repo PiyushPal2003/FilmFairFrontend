@@ -190,7 +190,6 @@ export default function Home() {
                                         console.log(visitorId);
                                       } else if(res.status==400){
                                         dispatch(updateAuth())
-                                        resolve(false);
                                         return
                                       }
                                     })
