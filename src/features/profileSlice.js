@@ -8,7 +8,7 @@ const initialState = {
 
 export const fetchprofile = createAsyncThunk('FilmFairProfile/fetchprofile', async(token, { rejectWithValue }) => {
     try {
-      const response = await fetch("https://filmfairserver.vercel.app/getuser", {
+      const response = await fetch("https://filmfairserverr.vercel.app/getuser", {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',

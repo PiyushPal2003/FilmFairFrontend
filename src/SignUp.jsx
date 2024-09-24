@@ -61,7 +61,7 @@ export default function SignUp() {
       user_pass: hashedpassword,
     };
     
-    fetch("https://filmfairserver.vercel.app/user_signup", {
+    fetch("https://filmfairserverr.vercel.app/user_signup", {
       method: "POST",
       headers:{"Content-Type": "application/json"},
       body: JSON.stringify(updatedData),
@@ -109,7 +109,7 @@ export default function SignUp() {
       plan_id: price,
       usr_id: usr
     }
-        fetch("https://filmfairserver.vercel.app/checkout", {
+        fetch("https://filmfairserverr.vercel.app/checkout", {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',

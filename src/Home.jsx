@@ -73,7 +73,7 @@ export default function Home() {
         const checktoken = prevhalftoken? prevhalftoken + '.' + accessToken: undefined;
 
         if(sessionID && !accessToken){ //new user, only sessionID present and no cookie
-            fetch('https://filmfairserver.vercel.app/striperetrieve', {
+            fetch('https://filmfairserverr.vercel.app/striperetrieve', {
                 method: "POST",
                 headers: {
                   'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export default function Home() {
                 if(data.status=="paid"){
                     const ab=data;
 
-                        fetch('https://filmfairserver.vercel.app/generatejwt', {// display payment SUCCESS OR FAILURE
+                        fetch('https://filmfairserverr.vercel.app/generatejwt', {// display payment SUCCESS OR FAILURE
                             method: "POST",
                             headers: {
                               'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ export default function Home() {
             })
         }
         else if(authCookie && !accessToken){
-            fetch("https://filmfairserver.vercel.app/verifyjwt", {
+            fetch("https://filmfairserverr.vercel.app/verifyjwt", {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
@@ -140,7 +140,7 @@ export default function Home() {
                                     const { visitorId } = await fp.get();
                                     const id=res.payload.data._id;
             
-                                    fetch('https://filmfairserver.vercel.app/verifyfingerprint', {
+                                    fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                                       method: "POST",
                                       headers: {
                                         "Content-Type":"application/json" },
@@ -164,7 +164,7 @@ export default function Home() {
             })
         }
         else if (authCookie && accessToken) {
-            fetch("https://filmfairserver.vercel.app/verifyjwt", {
+            fetch("https://filmfairserverr.vercel.app/verifyjwt", {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
@@ -181,7 +181,7 @@ export default function Home() {
                                     const { visitorId } = await fp.get();
                                     const id=res.payload.data._id;
                   
-                                    fetch('https://filmfairserver.vercel.app/verifyfingerprint', {
+                                    fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                                       method: "POST",
                                       headers: {
                                         "Content-Type":"application/json" },

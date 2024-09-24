@@ -38,7 +38,7 @@ export default function Genres() {
             resolve(false);
         }
         else if(!accessToken && authCookie){
-            fetch("https://filmfairserver.vercel.app/verifyjwt", {
+            fetch("https://filmfairserverr.vercel.app/verifyjwt", {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ export default function Genres() {
                                     const { visitorId } = await fp.get();
                                     const id = data[1].payload.data._id;
                   
-                                    fetch('https://filmfairserver.vercel.app/verifyfingerprint', {
+                                    fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                                       method: "POST",
                                       headers: {
                                         "Content-Type":"application/json" },
@@ -103,7 +103,7 @@ export default function Genres() {
                                 const { visitorId } = await fp.get();
                                 const id = data.payload.data._id;
               
-                                fetch('https://filmfairserver.vercel.app/verifyfingerprint', {
+                                fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                                   method: "POST",
                                   headers: {
                                     "Content-Type":"application/json" },
@@ -136,7 +136,7 @@ export default function Genres() {
         // return true;
         }
         else if(accessToken && authCookie){
-          fetch("https://filmfairserver.vercel.app/verifyjwt", {
+          fetch("https://filmfairserverr.vercel.app/verifyjwt", {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
@@ -164,7 +164,7 @@ export default function Genres() {
                             const { visitorId } = await fp.get();
                             const id = data[1].payload.data._id;
           
-                            fetch('https://filmfairserver.vercel.app/verifyfingerprint', {
+                            fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                               method: "POST",
                               headers: {
                                 "Content-Type":"application/json" },
@@ -199,7 +199,7 @@ export default function Genres() {
                         const { visitorId } = await fp.get();
                         const id = data.payload.data._id;
       
-                        fetch('https://filmfairserver.vercel.app/verifyfingerprint', {
+                        fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                           method: "POST",
                           headers: {
                             "Content-Type":"application/json" },

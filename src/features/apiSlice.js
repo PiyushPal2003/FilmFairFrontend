@@ -8,7 +8,7 @@ const initialState = {
 
 export const fetchdt = createAsyncThunk('FilmFairAPI/fetchdt', async () => {
     try {
-        const response = await fetch("https://filmfairserver.vercel.app/api?param=true")
+        const response = await fetch("https://filmfairserverr.vercel.app/api?param=true")
         const data = await response.json();
         return data;
       } catch (error) {

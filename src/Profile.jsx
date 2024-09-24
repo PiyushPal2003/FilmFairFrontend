@@ -31,7 +31,7 @@ export default function Profile() {
           document.getElementsByClassName("profile-model")[0].style.display="flex";
           return false;
       } else if (!accessToken && authCookie) {
-          fetch("https://filmfairserver.vercel.app/verifyjwt", {
+          fetch("https://filmfairserverr.vercel.app/verifyjwt", {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export default function Profile() {
                     const { visitorId } = await fp.get();
                     const id = data.payload.data._id;
   
-                    fetch('https://filmfairserver.vercel.app/verifyfingerprint', {
+                    fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                       method: "POST",
                       headers: {
                         "Content-Type":"application/json" },
@@ -100,7 +100,7 @@ export default function Profile() {
               const { visitorId } = await fp.get();
               const id = data.payload.data._id;
 
-              fetch('https://filmfairserver.vercel.app/verifyfingerprint', {
+              fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                 method: "POST",
                 headers: {
                   "Content-Type":"application/json" },
@@ -143,7 +143,7 @@ export default function Profile() {
     if (sessionStorage.getItem('sessionID')) {
       sessionStorage.removeItem('sessionID'); }
       
-      fetch("https://filmfairserver.vercel.app/logoutuser", {
+      fetch("https://filmfairserverr.vercel.app/logoutuser", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'},
@@ -160,7 +160,7 @@ export default function Profile() {
         console.error("Customer ID is not defined");
         return;
         }
-          fetch("https://filmfairserver.vercel.app/customer-portal", {
+          fetch("https://filmfairserverr.vercel.app/customer-portal", {
             method: "POST",
             headers: {
               'Content-Type': 'application/json'},

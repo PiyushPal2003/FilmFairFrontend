@@ -57,7 +57,7 @@ export default function Login() {
       setIsLoading(true)
       console.log("submit button clicked");
   
-      fetch("https://filmfairserver.vercel.app/user_signin", {
+      fetch("https://filmfairserverr.vercel.app/user_signin", {
           method: "POST",
           body: JSON.stringify(user),
           headers: {
@@ -160,7 +160,7 @@ function stripesession(price, usr){
       plan_id: price,
       usr_id: usr
     }
-        fetch("https://filmfairserver.vercel.app/checkout", {
+        fetch("https://filmfairserverr.vercel.app/checkout", {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',

@@ -46,7 +46,7 @@ export default function Moviedetail() {
         resolve(false);
     }
     else if(!accessToken && authCookie){
-        fetch("https://filmfairserver.vercel.app/verifyjwt", {
+        fetch("https://filmfairserverr.vercel.app/verifyjwt", {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ export default function Moviedetail() {
                         const { visitorId } = await fp.get();
                         const id=res.payload.data._id;
 
-                        fetch('https://filmfairserver.vercel.app/verifyfingerprint', {
+                        fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                           method: "POST",
                           headers: {
                             "Content-Type":"application/json" },
@@ -99,7 +99,7 @@ export default function Moviedetail() {
         })
     }
     else if(accessToken && authCookie){
-      fetch("https://filmfairserver.vercel.app/verifyjwt", {
+      fetch("https://filmfairserverr.vercel.app/verifyjwt", {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ export default function Moviedetail() {
                   const { visitorId } = await fp.get();
                   const id=res.payload.data._id;
 
-                  fetch('https://filmfairserver.vercel.app/verifyfingerprint', {
+                  fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                     method: "POST",
                     headers: {
                       "Content-Type":"application/json" },
@@ -166,7 +166,7 @@ export default function Moviedetail() {
     const prevhalftoken = splittoken? splittoken[0]+'.'+splittoken[1]: undefined;
     const checktoken = prevhalftoken? prevhalftoken + '.' + accessToken: undefined;
 
-        fetch("https://filmfairserver.vercel.app/details", {
+        fetch("https://filmfairserverr.vercel.app/details", {
           method: "POST",
           headers: {
             "Content-Type":"application/json",
@@ -204,7 +204,7 @@ export default function Moviedetail() {
   function updatereviewrating(e){
     e.preventDefault();
     
-    fetch("https://filmfairserver.vercel.app/updatereviewrating", {
+    fetch("https://filmfairserverr.vercel.app/updatereviewrating", {
       method: "PATCH",
       headers: {"Content-Type":"application/json"},
       body: JSON.stringify({id, usrreview, usrrating, user})
@@ -224,7 +224,7 @@ export default function Moviedetail() {
   }
 
   function wishliststatus(){
-    fetch(`https://filmfairserver.vercel.app/wishlistStatus`, {
+    fetch(`https://filmfairserverr.vercel.app/wishlistStatus`, {
       method: "POST",
       headers: {"Content-Type":"application/json"},
       body: JSON.stringify({id, usrs})
@@ -242,7 +242,7 @@ export default function Moviedetail() {
 }
 
 function wishlist(){
-  fetch("https://filmfairserver.vercel.app/wishlist", {
+  fetch("https://filmfairserverr.vercel.app/wishlist", {
     method: "PATCH",
     headers: {"Content-Type":"application/json"},
     body: JSON.stringify({id, usrs})
@@ -257,7 +257,7 @@ function wishlist(){
 }) }
 
 function deleteWishlist(){
-fetch("https://filmfairserver.vercel.app/deletewish", {
+fetch("https://filmfairserverr.vercel.app/deletewish", {
   method: "PATCH",
   headers: {"Content-Type":"application/json"},
   body: JSON.stringify({id, usrs})
