@@ -58,16 +58,22 @@ export default function Wishlist() {
                         try{
                             const disdata = Promise.all([
                                 dispatch(fetchdt()), //0 api
-                                dispatch(fetchprofile(cookieValue)), //1 profile
+                                fetch("https://filmfairserverr.vercel.app/getuser", {
+                                  method: 'POST',
+                                  headers: {
+                                  'Content-Type': 'application/json',
+                                  Authorization: `Bearer ${cookieValue}`
+                                  },
+                                }).then(res=>res.json()) //1 profile
                             ]);
                             disdata.then((data)=>{
-                                profiledata=data[1].payload.data;
+                                profiledata=data[1].data;
                                 apidata=data[0].payload;
 
                                 const setFp = async () => {
                                     const fp = await FingerprintJS.load();
                                     const { visitorId } = await fp.get();
-                                    const id = data[1].payload.data._id;
+                                    const id = data[1].data._id;
                   
                                     fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                                       method: "POST",
@@ -82,7 +88,6 @@ export default function Wishlist() {
                                       } else if(res.status==400){
                                         document.getElementsByClassName("wish-status")[0].style.display="flex";
                                         document.getElementsByClassName("wish-model")[0].style.display="flex";
-                                        dispatch(updateAuth())
                                         resolve(false);
                                         return
                                       }
@@ -98,14 +103,20 @@ export default function Wishlist() {
                         }
                     }
                     else if(apidt.length > 0){
-                        dispatch(fetchprofile(cookieValue))
+                      fetch("https://filmfairserverr.vercel.app/getuser", {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${cookieValue}`
+                        },
+                      })
+                      .then(res=>res.json())
                         .then((data)=>{
-                            profiledata=data.payload.data;
-
+                            profiledata= data;
                             const setFp = async () => {
                                 const fp = await FingerprintJS.load();
                                 const { visitorId } = await fp.get();
-                                const id = data.payload.data._id;
+                                const id = data._id;
               
                                 fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                                   method: "POST",
@@ -120,7 +131,6 @@ export default function Wishlist() {
                                   } else if(res.status==400){
                                     document.getElementsByClassName("wish-status")[0].style.display="flex";
                                     document.getElementsByClassName("wish-model")[0].style.display="flex";
-                                    dispatch(updateAuth())
                                     resolve(false);
                                     return
                                   }
@@ -139,16 +149,22 @@ export default function Wishlist() {
                 try{
                     const disdata = Promise.all([
                         dispatch(fetchdt()),
-                        dispatch(fetchprofile(checktoken)),
+                        fetch("https://filmfairserverr.vercel.app/getuser", {
+                          method: 'POST',
+                          headers: {
+                          'Content-Type': 'application/json',
+                          Authorization: `Bearer ${checktoken}`
+                          },
+                        }).then(res=>res.json())
                     ]);
                     disdata.then((data)=>{
-                        profiledata=data[1].payload.data;
+                        profiledata=data[1].data;
                         apidata=data[0].payload;
 
                         const setFp = async () => {
                             const fp = await FingerprintJS.load();
                             const { visitorId } = await fp.get();
-                            const id = data[1].payload.data._id;
+                            const id = data[1].data._id;
           
                             fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                               method: "POST",
@@ -162,7 +178,6 @@ export default function Wishlist() {
                               } else if(res.status==400){
                                 document.getElementsByClassName("wish-status")[0].style.display="flex";
                                 document.getElementsByClassName("wish-model")[0].style.display="flex";
-                                dispatch(updateAuth())
                                 resolve(false);
                                 return
                               }
@@ -178,14 +193,20 @@ export default function Wishlist() {
                 }
             }
             else if(apidt.length > 0){
-                dispatch(fetchprofile(checktoken))
+              fetch("https://filmfairserverr.vercel.app/getuser", {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${checktoken}`
+                },
+              })
+              .then(res=>res.json())
                 .then((data)=>{
-                    profiledata=data.payload.data;
-
+                    profiledata=data;
                     const setFp = async () => {
                         const fp = await FingerprintJS.load();
                         const { visitorId } = await fp.get();
-                        const id = data.payload.data._id;
+                        const id = data._id;
       
                         fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                           method: "POST",
@@ -199,7 +220,6 @@ export default function Wishlist() {
                           } else if(res.status==400){
                             document.getElementsByClassName("wish-status")[0].style.display="flex";
                             document.getElementsByClassName("wish-model")[0].style.display="flex";
-                            dispatch(updateAuth())
                             resolve(false);
                             return
                           }

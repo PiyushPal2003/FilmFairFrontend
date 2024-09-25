@@ -55,7 +55,13 @@ export default function Genres() {
                         try{
                             const disdata = Promise.all([
                                 dispatch(fetchdt()),
-                                dispatch(fetchprofile(cookieValue)),
+                                fetch("https://filmfairserverr.vercel.app/getuser", {
+                                  method: 'POST',
+                                  headers: {
+                                  'Content-Type': 'application/json',
+                                  Authorization: `Bearer ${cookieValue}`
+                                  },
+                              }).then(res=>res.json())
                             ]);
                             disdata.then((data)=>{
                                 setData(data[0].payload);
@@ -65,7 +71,7 @@ export default function Genres() {
                                 const setFp = async () => {
                                     const fp = await FingerprintJS.load();
                                     const { visitorId } = await fp.get();
-                                    const id = data[1].payload.data._id;
+                                    const id = data[1].data._id;
                   
                                     fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                                       method: "POST",
@@ -80,7 +86,6 @@ export default function Genres() {
                                       } else if(res.status==400){
                                         document.getElementsByClassName("genres-status")[0].style.display="flex";
                                         document.getElementsByClassName("genres-model")[0].style.display="flex";
-                                        dispatch(updateAuth())
                                         resolve(false);
                                         return
                                       }
@@ -96,12 +101,19 @@ export default function Genres() {
                         }
                     }
                     else if(apidt.length > 0){
-                        dispatch(fetchprofile(cookieValue))
+                      fetch("https://filmfairserverr.vercel.app/getuser", {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${cookieValue}`
+                        },
+                      })
+                      .then(res=>res.json())
                         .then((data)=>{
                             const setFp = async () => {
                                 const fp = await FingerprintJS.load();
                                 const { visitorId } = await fp.get();
-                                const id = data.payload.data._id;
+                                const id = data._id;
               
                                 fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                                   method: "POST",
@@ -116,7 +128,6 @@ export default function Genres() {
                                   } else if(res.status==400){
                                     document.getElementsByClassName("genres-status")[0].style.display="flex";
                                     document.getElementsByClassName("genres-model")[0].style.display="flex";
-                                    dispatch(updateAuth())
                                     resolve(false);
                                     return
                                   }
@@ -151,18 +162,24 @@ export default function Genres() {
             if(apidt.length <= 0){
                 try{
                     const disdata = Promise.all([
-                        dispatch(fetchdt()),
-                        dispatch(fetchprofile(checktoken)),
+                      dispatch(fetchdt()),
+                      fetch("https://filmfairserverr.vercel.app/getuser", {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${checktoken}`
+                        },
+                      }).then(res=>res.json())
                     ]);
                     disdata.then((data)=>{
-                        setData(data[0].payload);
-                        setFilteredData(data[0].payload);
-                        setActiveGenre("");
+                    setData(data[0].payload);
+                    setFilteredData(data[0].payload);
+                    setActiveGenre("");
 
                         const setFp = async () => {
                             const fp = await FingerprintJS.load();
                             const { visitorId } = await fp.get();
-                            const id = data[1].payload.data._id;
+                            const id = data[1].data._id;
           
                             fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                               method: "POST",
@@ -176,7 +193,6 @@ export default function Genres() {
                               } else if(res.status==400){
                                 document.getElementsByClassName("genres-status")[0].style.display="flex";
                                 document.getElementsByClassName("genres-model")[0].style.display="flex";
-                                dispatch(updateAuth())
                                 resolve(false);
                                 return
                               }
@@ -192,12 +208,19 @@ export default function Genres() {
                 }
             }
             else if(apidt.length > 0){
-                dispatch(fetchprofile(checktoken))
+              fetch("https://filmfairserverr.vercel.app/getuser", {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${checktoken}`
+                },
+              })
+              .then(res=>res.json())
                 .then((data)=>{
                     const setFp = async () => {
                         const fp = await FingerprintJS.load();
                         const { visitorId } = await fp.get();
-                        const id = data.payload.data._id;
+                        const id = data._id;
       
                         fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                           method: "POST",
@@ -211,7 +234,6 @@ export default function Genres() {
                           } else if(res.status==400){
                             document.getElementsByClassName("genres-status")[0].style.display="flex";
                             document.getElementsByClassName("genres-model")[0].style.display="flex";
-                            dispatch(updateAuth())
                             resolve(false);
                             return
                           }

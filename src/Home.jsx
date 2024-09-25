@@ -132,13 +132,19 @@ export default function Home() {
             }).then((res)=>{
                 if(res.ok){
                     if(Object.keys(profile).length === 0){
-                        dispatch(fetchprofile(cookieValue))
-                        .then((res)=>{
-                            if (res.meta.requestStatus === 'fulfilled') {
+                        fetch("https://filmfairserverr.vercel.app/getuser", {
+                            method: 'POST',
+                            headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${cookieValue}`
+                            },
+                        }).then((res)=>{
+                            if (res.ok) {
                                 const setFp = async () => {
+                                    const data = await res.json();
                                     const fp = await FingerprintJS.load();
                                     const { visitorId } = await fp.get();
-                                    const id=res.payload.data._id;
+                                    const id=data._id;
             
                                     fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                                       method: "POST",
@@ -151,7 +157,6 @@ export default function Home() {
                                         dispatch(updateFingerprint(visitorId))
                                         console.log(visitorId);
                                       } else if(res.status==400){
-                                        dispatch(updateAuth())
                                         return
                                       }
                                     })
@@ -173,13 +178,19 @@ export default function Home() {
               }).then((res)=>{
                 if(res.ok){
                     if(Object.keys(profile).length === 0){
-                        dispatch(fetchprofile(checktoken))
-                        .then((res)=>{
-                            if (res.meta.requestStatus === 'fulfilled') {
+                        fetch("https://filmfairserverr.vercel.app/getuser", {
+                            method: 'POST',
+                            headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${checktoken}`
+                            },
+                        }).then((res)=>{
+                            if (res.ok) {
                                 const setFp = async () => {
+                                    const data = await res.json();
                                     const fp = await FingerprintJS.load();
                                     const { visitorId } = await fp.get();
-                                    const id=res.payload.data._id;
+                                    const id=data._id;
                   
                                     fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                                       method: "POST",
@@ -191,7 +202,7 @@ export default function Home() {
                                         dispatch(updateFingerprint(visitorId))
                                         console.log(visitorId);
                                       } else if(res.status==400){
-                                        dispatch(updateAuth())
+                                        console.log("fingerprint doesnt exist")
                                         return
                                       }
                                     })
