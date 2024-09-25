@@ -80,7 +80,7 @@ export default function Moviedetail() {
                           body:JSON.stringify({visitorId, id})
                         }).then((res)=>{
                           if(res.status==200){
-                            dispatch(updateProfile(data))
+                            dispatch(updateProfile({status:200, data}))
                             sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                             dispatch(updateFingerprint(visitorId))
                             console.log(visitorId);
@@ -139,7 +139,7 @@ export default function Moviedetail() {
                     body:JSON.stringify({visitorId, id})
                   }).then((res)=>{
                     if(res.status==200){
-                      dispatch(updateProfile(data))
+                      dispatch(updateProfile({status:200, data}))
                       dispatch(updateFingerprint(visitorId))
                       console.log(visitorId);
                     } else if(res.status==400){
