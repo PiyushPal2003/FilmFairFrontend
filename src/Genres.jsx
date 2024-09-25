@@ -7,7 +7,7 @@ import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import Footer from './Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchdt } from './features/apiSlice';
-import { updateAuth, updateFingerprint, fetchprofile } from './features/profileSlice';
+import { updateFingerprint, updateProfile } from './features/profileSlice';
 import { CgInfo } from "react-icons/cg";
 
 export default function Genres() {
@@ -71,7 +71,7 @@ export default function Genres() {
                                 const setFp = async () => {
                                     const fp = await FingerprintJS.load();
                                     const { visitorId } = await fp.get();
-                                    const id = data[1].data._id;
+                                    const id = data[1]._id;
                   
                                     fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                                       method: "POST",
@@ -80,6 +80,7 @@ export default function Genres() {
                                       body:JSON.stringify({visitorId, id})
                                     }).then((res)=>{
                                       if(res.status==200){
+                                        dispatch(updateProfile(data[1]))
                                         sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                         dispatch(updateFingerprint(visitorId))
                                         console.log(visitorId);
@@ -122,6 +123,7 @@ export default function Genres() {
                                   body:JSON.stringify({visitorId, id})
                                 }).then((res)=>{
                                   if(res.status==200){
+                                    dispatch(updateProfile(data))
                                     sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                     dispatch(updateFingerprint(visitorId))
                                     console.log(visitorId);
@@ -179,7 +181,7 @@ export default function Genres() {
                         const setFp = async () => {
                             const fp = await FingerprintJS.load();
                             const { visitorId } = await fp.get();
-                            const id = data[1].data._id;
+                            const id = data[1]._id;
           
                             fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                               method: "POST",
@@ -188,6 +190,7 @@ export default function Genres() {
                               body:JSON.stringify({visitorId, id})
                             }).then((res)=>{
                               if(res.status==200){
+                                dispatch(updateProfile(data[1]))
                                 dispatch(updateFingerprint(visitorId))
                                 console.log(visitorId);
                               } else if(res.status==400){
@@ -229,6 +232,7 @@ export default function Genres() {
                           body:JSON.stringify({visitorId, id})
                         }).then((res)=>{
                           if(res.status==200){
+                            dispatch(updateProfile(data))
                             dispatch(updateFingerprint(visitorId))
                             console.log(visitorId);
                           } else if(res.status==400){

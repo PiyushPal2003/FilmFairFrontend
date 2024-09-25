@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { CgInfo } from "react-icons/cg";
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from './Footer';
-import { updateAuth, updateFingerprint, fetchprofile } from './features/profileSlice';
+import { updateProfile, updateFingerprint, } from './features/profileSlice';
 
 export default function Moviedetail() {
 
@@ -80,6 +80,7 @@ export default function Moviedetail() {
                           body:JSON.stringify({visitorId, id})
                         }).then((res)=>{
                           if(res.status==200){
+                            dispatch(updateProfile(data))
                             sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                             dispatch(updateFingerprint(visitorId))
                             console.log(visitorId);
@@ -138,6 +139,7 @@ export default function Moviedetail() {
                     body:JSON.stringify({visitorId, id})
                   }).then((res)=>{
                     if(res.status==200){
+                      dispatch(updateProfile(data))
                       dispatch(updateFingerprint(visitorId))
                       console.log(visitorId);
                     } else if(res.status==400){

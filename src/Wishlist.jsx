@@ -4,7 +4,7 @@ import Footer from './Footer';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchdt } from './features/apiSlice'
-import { updateAuth, updateFingerprint, fetchprofile } from './features/profileSlice';
+import { updateProfile, updateFingerprint, fetchprofile } from './features/profileSlice';
 import { CgInfo } from "react-icons/cg";
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import Navbar from './Navbar';
@@ -16,6 +16,7 @@ export default function Wishlist() {
     const { profile, auth } = useSelector((state) => state.profile);
     const dispatch = useDispatch();
 
+    const [name, setName] = useState({});
     const [data, setData] = useState([]);
     const [load, setLoad] = useState(true);
     
@@ -67,13 +68,14 @@ export default function Wishlist() {
                                 }).then(res=>res.json()) //1 profile
                             ]);
                             disdata.then((data)=>{
-                                profiledata=data[1].data;
+                                profiledata=data[1];
                                 apidata=data[0].payload;
+                                setName(data[1])
 
                                 const setFp = async () => {
                                     const fp = await FingerprintJS.load();
                                     const { visitorId } = await fp.get();
-                                    const id = data[1].data._id;
+                                    const id = data[1]._id;
                   
                                     fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                                       method: "POST",
@@ -82,6 +84,7 @@ export default function Wishlist() {
                                       body:JSON.stringify({visitorId, id})
                                     }).then((res)=>{
                                       if(res.status==200){
+                                        dispatch(updateProfile(data[1].data))
                                         sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                         dispatch(updateFingerprint(visitorId))
                                         console.log(visitorId);
@@ -113,6 +116,7 @@ export default function Wishlist() {
                       .then(res=>res.json())
                         .then((data)=>{
                             profiledata= data;
+                            setName(data)
                             const setFp = async () => {
                                 const fp = await FingerprintJS.load();
                                 const { visitorId } = await fp.get();
@@ -125,6 +129,7 @@ export default function Wishlist() {
                                   body:JSON.stringify({visitorId, id})
                                 }).then((res)=>{
                                   if(res.status==200){
+                                    dispatch(updateProfile(data))
                                     sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                     dispatch(updateFingerprint(visitorId))
                                     console.log(visitorId);
@@ -158,13 +163,14 @@ export default function Wishlist() {
                         }).then(res=>res.json())
                     ]);
                     disdata.then((data)=>{
-                        profiledata=data[1].data;
+                        profiledata=data[1];
                         apidata=data[0].payload;
+                        setName(data[1])
 
                         const setFp = async () => {
                             const fp = await FingerprintJS.load();
                             const { visitorId } = await fp.get();
-                            const id = data[1].data._id;
+                            const id = data[1]._id;
           
                             fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                               method: "POST",
@@ -173,6 +179,7 @@ export default function Wishlist() {
                               body:JSON.stringify({visitorId, id})
                             }).then((res)=>{
                               if(res.status==200){
+                                dispatch(updateProfile(data[1].data))
                                 dispatch(updateFingerprint(visitorId))
                                 console.log(visitorId);
                               } else if(res.status==400){
@@ -203,6 +210,7 @@ export default function Wishlist() {
               .then(res=>res.json())
                 .then((data)=>{
                     profiledata=data;
+                    setName(data)
                     const setFp = async () => {
                         const fp = await FingerprintJS.load();
                         const { visitorId } = await fp.get();
@@ -215,6 +223,7 @@ export default function Wishlist() {
                           body:JSON.stringify({visitorId, id})
                         }).then((res)=>{
                           if(res.status==200){
+                            dispatch(updateProfile(data))
                             dispatch(updateFingerprint(visitorId))
                             console.log(visitorId);
                           } else if(res.status==400){
@@ -267,6 +276,7 @@ export default function Wishlist() {
                 .then((data)=>{
                 // setUsrProfile(data.payload);
                 const profiledata=data.payload;
+                setName(data.payload.data)
 
                 profiledata.data.Wishlist.forEach((movieId) => {
                     const movie = apidt.find((m) => m._id == movieId);
@@ -285,6 +295,7 @@ export default function Wishlist() {
               disdata.then((data)=>{
                 const profiledata=data[1].payload.data;
                 const apidata=data[0].payload;
+                setName(data[1].payload.data)
                       profiledata.data.Wishlist.forEach((movieId) => {
                             const movie = apidata.find((m) => m._id == movieId);
                             if (movie) {
@@ -342,7 +353,7 @@ export default function Wishlist() {
                 <div className='wishlist-head'>
                     <div>
                         <div>
-                        <h1 className='mydetails'>Hi, {`${Object.keys(profile).length > 0 ? profile.data.UserNAME : 'Fetching'  }`}</h1>
+                        <h1 className='mydetails'>Hi, {`${Object.keys(name).length > 0 ? data.UserNAME : 'User'}`}</h1>
                         <h1 className='mydetails1'>Hope you are enjoying your day with FlimFair 🤗</h1>
                         </div>
                         <br/>

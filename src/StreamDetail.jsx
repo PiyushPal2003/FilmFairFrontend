@@ -5,7 +5,7 @@ import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import { useParams } from 'react-router-dom';
 import { CgInfo } from "react-icons/cg";
 import { useDispatch, useSelector } from 'react-redux';
-import { updateAuth, updateFingerprint, fetchprofile } from './features/profileSlice';
+import { updateProfile, updateFingerprint } from './features/profileSlice';
 import Navbar from './Navbar';
 import VideoPlayer from './VideoPlayer';
 import Footer from './Footer';
@@ -105,14 +105,15 @@ export default function StreamDetail() {
                           const fp = await FingerprintJS.load();
                           const { visitorId } = await fp.get();
                           const id=data._id;
-  
+                          
                           fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                             method: "POST",
                             headers: {
                               "Content-Type":"application/json" },
-                            body:JSON.stringify({visitorId, id})
-                          }).then((res)=>{
-                            if(res.status==200){
+                              body:JSON.stringify({visitorId, id})
+                            }).then((res)=>{
+                              if(res.status==200){
+                              dispatch(updateProfile(data))
                               sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                               dispatch(updateFingerprint(visitorId))
                               console.log(visitorId);
@@ -170,6 +171,7 @@ export default function StreamDetail() {
                       body:JSON.stringify({visitorId, id})
                     }).then((res)=>{
                       if(res.status==200){
+                        dispatch(updateProfile(data))
                         dispatch(updateFingerprint(visitorId))
                         console.log(visitorId);
                       } else if(res.status==400){

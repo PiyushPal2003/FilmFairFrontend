@@ -214,7 +214,7 @@ export default function Profile() {
         <div className='profile-content'>
           <div style={{display:"flex", justifyContent:"space-between"}}>
             <div>
-              <h1 className='mydetails' >Hi, {`${Object.keys(data).length > 0 ? data.UserNAME : 'Fetching'}`}</h1>
+              <h1 className='mydetails' >Hi, {`${Object.keys(data).length > 0 ? data.UserNAME : 'User'}`}</h1>
               <h1 className='mydetails1' >Hope you are enjoying your day with FlimFair 🤗</h1>
               <br/>
               <br/>

@@ -10,7 +10,7 @@ import StreamRow from './StreamRow';
 import Loading from './Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchdt } from './features/apiSlice'
-import { updateAuth, updateFingerprint, fetchprofile } from './features/profileSlice';
+import { updateProfile, updateFingerprint, fetchprofile } from './features/profileSlice';
 
 
 export default function Home() {
@@ -145,14 +145,15 @@ export default function Home() {
                                     const fp = await FingerprintJS.load();
                                     const { visitorId } = await fp.get();
                                     const id=data._id;
-            
+                                    
                                     fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                                       method: "POST",
                                       headers: {
-                                        "Content-Type":"application/json" },
-                                      body:JSON.stringify({visitorId, id})
-                                    }).then((res)=>{
-                                      if(res.status==200){
+                                          "Content-Type":"application/json" },
+                                          body:JSON.stringify({visitorId, id})
+                                      }).then((res)=>{
+                                        if(res.status==200){
+                                        dispatch(updateProfile(data));
                                         sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                         dispatch(updateFingerprint(visitorId))
                                         console.log(visitorId);
