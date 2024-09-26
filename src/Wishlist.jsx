@@ -353,7 +353,7 @@ export default function Wishlist() {
                 <div className='wishlist-head'>
                     <div>
                         <div>
-                        <h1 className='mydetails'>Hi, {`${Object.keys(name).length > 0 ? data.UserNAME : 'User'}`}</h1>
+                        <h1 className='mydetails'>Hi, {`${Object.keys(name).length > 0 ? name.UserNAME : 'User'}`}</h1>
                         <h1 className='mydetails1'>Hope you are enjoying your day with FlimFair 🤗</h1>
                         </div>
                         <br/>

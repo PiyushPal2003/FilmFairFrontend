@@ -12,10 +12,10 @@
 .detail-now-stream::before{
     content: "";
     position: absolute;
-    width: 2rem;
-    height: 0.39rem;
+    width: 1.3rem;
+    height: 0.40rem;
     background: rgb(255, 255, 255);
-    left: 73%;
+    left: 77%;
     top: -0.26rem;
     border-radius: 80%;
     filter: blur(1px);
@@ -23,10 +23,10 @@
 .detail-now-stream::after{
     content: "";
     position: absolute;
-    top: -0.24rem;
-    width: 5.5rem;
-    height: 0.3rem;
-    left: 54%;
+    top: -0.19rem;
+    width: 5rem;
+    height: 0.32rem;
+    left: 65%;
     border-radius: 30%;
     background: linear-gradient(320deg, rgba(210, 196, 170, 0) 0%, rgb(255, 252, 244) 50.49%, rgba(226, 226, 226, 0) 100%);
 }

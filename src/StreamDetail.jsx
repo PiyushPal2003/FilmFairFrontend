@@ -21,6 +21,7 @@ export default function StreamDetail() {
     const { profile, auth, CurrentUserFingerprint} = useSelector((state) => state.profile);
     let usrs;
   
+    const [name, setName]= useState({});
     const [data, setData]= useState({});
     const [user, setUser] = useState("");
     const [usrreview, setUsrReview] = useState("");
@@ -105,6 +106,7 @@ export default function StreamDetail() {
                           const fp = await FingerprintJS.load();
                           const { visitorId } = await fp.get();
                           const id=data._id;
+                          setName(data);
                           
                           fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                             method: "POST",
@@ -232,20 +234,38 @@ export default function StreamDetail() {
               console.log("Movie Doesnt Exits")
             }
             else if(dt){
-              if(profile.data.Subscription.amtPaid==900){
-                document.getElementsByClassName("Login-status1")[0].style.display="flex";
-                document.getElementsByClassName("login-model1")[0].style.display="flex";
-                console.log("Basic user restricted stream row movie view");
-              } else if(dt?.movie[0].cat=="short" && profile.data.Subscription.amtPaid==9900 || 4900){
-                console.log("Standard or Premium User");
-                setData(dt?.movie[0]);
-                setUser(dt.usr);
-                usrs=dt.usr;
-                setRateDt(Object.values(dt?.movie[0].ratings))
-                setUsrReview(dt?.movie[0].reviews[usrs])
-                setUsrRating(dt?.movie[0].ratings[usrs])
-                wishliststatus();
-                setload(false);
+              if(Object.keys(profile).length > 0){
+                if(profile.data.Subscription.amtPaid==900){
+                  document.getElementsByClassName("Login-status1")[0].style.display="flex";
+                  document.getElementsByClassName("login-model1")[0].style.display="flex";
+                  console.log("Basic user restricted stream row movie view");
+                } else if(dt?.movie[0].cat=="short" && profile.data.Subscription.amtPaid==9900 || 4900){
+                  console.log("Standard or Premium User");
+                  setData(dt?.movie[0]);
+                  setUser(dt.usr);
+                  usrs=dt.usr;
+                  setRateDt(Object.values(dt?.movie[0].ratings))
+                  setUsrReview(dt?.movie[0].reviews[usrs])
+                  setUsrRating(dt?.movie[0].ratings[usrs])
+                  wishliststatus();
+                  setload(false);
+                }
+              } else{
+                if(name.Subscription.amtPaid==900){
+                  document.getElementsByClassName("Login-status1")[0].style.display="flex";
+                  document.getElementsByClassName("login-model1")[0].style.display="flex";
+                  console.log("Basic user restricted stream row movie view");
+                } else if(dt?.movie[0].cat=="short" && name.Subscription.amtPaid==9900 || 4900){
+                  console.log("Standard or Premium User");
+                  setData(dt?.movie[0]);
+                  setUser(dt.usr);
+                  usrs=dt.usr;
+                  setRateDt(Object.values(dt?.movie[0].ratings))
+                  setUsrReview(dt?.movie[0].reviews[usrs])
+                  setUsrRating(dt?.movie[0].ratings[usrs])
+                  wishliststatus();
+                  setload(false);
+                }
               }
             }
           });

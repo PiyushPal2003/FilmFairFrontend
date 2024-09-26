@@ -3,7 +3,7 @@ import './profile.css';
 import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateAuth, updateFingerprint, fetchprofile } from './features/profileSlice';
+import { updateProfile, updateFingerprint, updateAuth } from './features/profileSlice';
 import Navbar from './Navbar';
 import { CgInfo } from "react-icons/cg";
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
@@ -45,13 +45,20 @@ export default function Profile() {
                 document.getElementsByClassName("profile-model")[0].style.display="flex";
                 return false;
             } else{
-                dispatch(fetchprofile(cookieValue))
-                .then((data) => {
+              fetch("https://filmfairserverr.vercel.app/getuser", {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${cookieValue}`
+                },
+              })
+              .then(res=>res.json())
+              .then((data) => {
 
                   const setFp = async () => {
                     const fp = await FingerprintJS.load();
                     const { visitorId } = await fp.get();
-                    const id = data.payload.data._id;
+                    const id = data._id;
   
                     fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                       method: "POST",
@@ -60,27 +67,27 @@ export default function Profile() {
                       body:JSON.stringify({visitorId, id})
                     }).then((res)=>{
                       if(res.status==200){
-                        setData(data.payload.data);
+                        setData(data);
                         sessionStorage.setItem('FilmFairAccess', splittoken[2]);
+                        dispatch(updateProfile({status:200, data}))
                         dispatch(updateFingerprint(visitorId))
                         console.log(visitorId);
                       } else if(res.status==400){
                         document.getElementsByClassName("profile-status")[0].style.display="flex";
                         document.getElementsByClassName("profile-model")[0].style.display="flex";
-                        dispatch(updateAuth())
                         return false;
                       }
                     })
                   }
                   setFp();
 
-                  if(data.payload.data.Subscription.amtPaid==900){
+                  if(data.Subscription.amtPaid==900){
                     planameRef.current.innerText = 'Basic';
                     document.getElementById("features1").setAttribute("style","display:inline-block;")
-                  } else if(data.payload.data.Subscription.amtPaid==4900){
+                  } else if(data.Subscription.amtPaid==4900){
                     planameRef.current.innerText = 'Standard';
                     document.getElementById("features2").setAttribute("style","display:inline-block;")
-                  } else if(data.payload.data.Subscription.amtPaid==9900){
+                  } else if(data.Subscription.amtPaid==9900){
                     planameRef.current.innerText = 'Premium';
                     document.getElementById("features3").setAttribute("style","display:inline-block;")
                   }
@@ -92,13 +99,20 @@ export default function Profile() {
             }
           })
       } else if (accessToken && authCookie) {
-        dispatch(fetchprofile(checktoken))
+          fetch("https://filmfairserverr.vercel.app/getuser", {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${checktoken}`
+            },
+          })
+          .then(res=>res.json())
           .then((data) => {
 
             const setFp = async () => {
               const fp = await FingerprintJS.load();
               const { visitorId } = await fp.get();
-              const id = data.payload.data._id;
+              const id = data._id;
 
               fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                 method: "POST",
@@ -107,26 +121,26 @@ export default function Profile() {
                 body:JSON.stringify({visitorId, id})
               }).then((res)=>{
                 if(res.status==200){
-                  setData(data.payload.data);
+                  setData(data);
+                  dispatch(updateProfile({status:200, data}))
                   dispatch(updateFingerprint(visitorId))
                   console.log(visitorId);
                 } else if(res.status==400){
                   document.getElementsByClassName("profile-status")[0].style.display="flex";
                   document.getElementsByClassName("profile-model")[0].style.display="flex";
-                  dispatch(updateAuth())
                   return false;
                 }
               })
             }
             setFp();
 
-            if(data.payload.data.Subscription.amtPaid==900){
+            if(data.Subscription.amtPaid==900){
               planameRef.current.innerText = 'Basic';
               document.getElementById("features1").setAttribute("style","display:inline-block;")
-            } else if(data.payload.data.Subscription.amtPaid==4900){
+            } else if(data.Subscription.amtPaid==4900){
               planameRef.current.innerText = 'Standard';
               document.getElementById("features2").setAttribute("style","display:inline-block;")
-            } else if(data.payload.data.Subscription.amtPaid==9900){
+            } else if(data.Subscription.amtPaid==9900){
               planameRef.current.innerText = 'Premium';
               document.getElementById("features3").setAttribute("style","display:inline-block;")
             }
