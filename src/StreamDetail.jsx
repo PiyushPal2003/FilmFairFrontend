@@ -101,12 +101,13 @@ export default function StreamDetail() {
                   },
                 }).then((res)=>{
                     if (res.ok) {
+                      sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                         const setFp = async () => {
                           const data = await res.json();
                           const fp = await FingerprintJS.load();
                           const { visitorId } = await fp.get();
                           const id=data._id;
-                          setName(data);
+                          setName(data.Subscription.amtPaid);
                           
                           fetch('https://filmfairserverr.vercel.app/verifyfingerprint', {
                             method: "POST",
@@ -116,12 +117,12 @@ export default function StreamDetail() {
                             }).then((res)=>{
                               if(res.status==200){
                               dispatch(updateProfile({status:200, data}))
-                              sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                               dispatch(updateFingerprint(visitorId))
                               console.log(visitorId);
                             } else if(res.status==400){
                               document.getElementsByClassName("Login-status")[0].style.display = "flex";
                               document.getElementsByClassName("login-model")[0].style.display = "flex";
+                              sessionStorage.removeItem('FilmFairAccess');
                               resolve(false);
                               return
                             }
@@ -251,11 +252,11 @@ export default function StreamDetail() {
                   setload(false);
                 }
               } else{
-                if(name.Subscription.amtPaid==900){
+                if(name==900){
                   document.getElementsByClassName("Login-status1")[0].style.display="flex";
                   document.getElementsByClassName("login-model1")[0].style.display="flex";
                   console.log("Basic user restricted stream row movie view");
-                } else if(dt?.movie[0].cat=="short" && name.Subscription.amtPaid==9900 || 4900){
+                } else if(dt?.movie[0].cat=="short" && name==9900 || 4900){
                   console.log("Standard or Premium User");
                   setData(dt?.movie[0]);
                   setUser(dt.usr);

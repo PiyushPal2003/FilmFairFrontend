@@ -150,23 +150,28 @@ export default function Profile() {
       }
   }
 
-  function signout(){
-    document.cookie = 'FilmFairRefresh' + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    if (sessionStorage.getItem('FilmFairAccess')) {
-      sessionStorage.removeItem('FilmFairAccess'); }
-    if (sessionStorage.getItem('sessionID')) {
-      sessionStorage.removeItem('sessionID'); }
-      
+  function signout(){      
       fetch("https://filmfairserverr.vercel.app/logoutuser", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'},
           body: JSON.stringify({id: profile.data._id, fingerprint: CurrentUserFingerprint})
         })
-        
-      dispatch(updateFingerprint(null))
-      dispatch(updateAuth())
-      navigate('/signin')
+        .then((res)=>{
+          if(res.ok){
+            document.cookie = 'FilmFairRefresh' + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            if (sessionStorage.getItem('FilmFairAccess')) {
+              sessionStorage.removeItem('FilmFairAccess'); }
+            if (sessionStorage.getItem('sessionID')) {
+              sessionStorage.removeItem('sessionID'); }
+            if(sessionStorage.getItem('UserFingerprint')){
+              sessionStorage.removeItem('UserFingerprint'); }
+
+            navigate('/signin')
+            dispatch(updateFingerprint(null))
+            dispatch(updateAuth())
+          }
+        })
   }
 
     function customerprotal(custID){
@@ -257,13 +262,13 @@ export default function Profile() {
               </div>
               <div className='features' id='features2'>
                 <h1 className='subs-content-dt'>Features</h1>
-                <h1>Access to Basic Features</h1>
+                <h1>Access to All Features</h1>
                 <h1>No. of Devices Allowed: 2</h1>
                 <h1>Access to FilmFair Stream</h1>
               </div>
               <div className='features' id='features3'>
                 <h1 className='subs-content-dt'>Features</h1>
-                <h1>Access to Basic Features</h1>
+                <h1>Access to All Features</h1>
                 <h1>No. of Devices Allowed: 4</h1>
                 <h1>Access to FilmFair Stream</h1>
               </div>

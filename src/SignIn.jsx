@@ -235,7 +235,7 @@ function stripesession(price, usr){
                           <h1 className='plan-desc'>Premium Tier provides users access to Latest Movies, Trailers, allows users to Rate & Review movies and also Wishlist their favourite movies. This Tier is valid for a Month. T&C apply
                           <div className='features-box'>
                               <h3 style={{textDecoration:"underline"}}>Features</h3>
-                              <h4>Access to Basic Features</h4>
+                              <h4>Access to All Features</h4>
                               <h4>No. of Devices : 4</h4>
                               <h4>Access to FilmFair Stream</h4>
                           </div>
@@ -249,7 +249,7 @@ function stripesession(price, usr){
                           <h1 className='plan-desc'>Standard Tier provides users access to Latest Movies, Trailers, allows users to Rate & Review movies and also Wishlist their favourite movies. This Tier is valid for a Week. T&C apply
                           <div className='features-box'>
                               <h3 style={{textDecoration:"underline"}}>Features</h3>
-                              <h4>Access to Basic Features</h4>
+                              <h4>Access to All Features</h4>
                               <h4>No. of Devices : 2</h4>
                               <h4>Access to FilmFair Stream</h4>
                           </div>

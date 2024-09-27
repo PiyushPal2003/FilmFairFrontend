@@ -364,7 +364,7 @@ export default function Wishlist() {
                         <div className='wishes'>
                             <div className="wish-row-main">
                                 {data?.map((ele, key)=>(
-                                    <Link to={`/details/${ele?._id}`}><img className="wish-row-poster" loading="lazy" key={key} src={`${ele?.ver_poster}` } /></Link>
+                                    <Link to={ele.cat === "Short" ? `/detail/${ele?._id}` : `/details/${ele?._id}`}><img className="wish-row-poster" loading="lazy" key={key} src={`${ele?.ver_poster}` } /></Link>
                                 ))}
 
                             </div>
