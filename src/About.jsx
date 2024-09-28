@@ -10,6 +10,7 @@ import { BiLogoMongodb } from "react-icons/bi";
 import { SiRedux } from "react-icons/si";
 import { SiJsonwebtokens } from "react-icons/si";
 import { FaStripe } from "react-icons/fa";
+import { IoLogoFirebase } from "react-icons/io5";
 
 export default function About() {
   return (
@@ -33,6 +34,7 @@ export default function About() {
                 <a href="#" class="fa"><SiRedux size={38}/></a>
                 <a href="#" class="fa"><SiJsonwebtokens size={38}/></a>
                 <a href="#" class="fa"><FaStripe size={38}/></a>
+                <a href="#" class="fa"><IoLogoFirebase size={38}/></a>
               </div>
 
             <h1 style={{margin:"4rem 0", textAlign:"center"}}>Lets Connect😊</h1>

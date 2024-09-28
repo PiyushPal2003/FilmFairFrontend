@@ -8,6 +8,7 @@
     position: relative;
     color: gold;
     font-family: 'Tangerine';
+    min-width: 21rem;
 }
 .detail-now-stream::before{
     content: "";

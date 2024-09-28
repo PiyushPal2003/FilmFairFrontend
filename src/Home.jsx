@@ -36,8 +36,12 @@ export default function Home() {
     }
 
     const navigate = useNavigate();
-    function linkto(id){
-        navigate(`/details/${id}`);
+    function linkto(id, cat) {
+        if (cat == "Short") {
+          navigate(`/detail/${id}`);
+        } else {
+          navigate(`/details/${id}`);
+        }
     }
 
     function modeltoggle(){
@@ -280,7 +284,7 @@ export default function Home() {
                             <div className='banner-title'>
                                 <h1 className='ban-mov-tit1'>{item?.movies_title}</h1><span className='ban-mov-tit2'>({item?.year})</span>
                                 <p className='ban-mov-tit3'>{truncate(`${item?.desc}`, 150)}</p>
-                                <button className='banner-play-btn' onClick={() => item.cat === "Short" ? linkto(`/detail/${item._id}`) : linkto(`/details/${item._id}`)}>▶ Play Trailer</button>
+                                <button className='banner-play-btn' onClick={() => linkto(item._id, item.cat)}>{item.cat!='Short' ? '▶ Play Trailer': '▶ Stream Now'}</button>
                             </div>
                             <div className='fade'></div>
                         </div>)
