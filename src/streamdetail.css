@@ -58,3 +58,18 @@
         display: none;
         background: linear-gradient(122deg, rgb(133 9 9 / 83%) 0%, rgb(0 0 0 / 85%) 50%, rgb(146 20 20 / 82%) 100%);
     }
+
+@media(max-width: 500px){
+    .detail-now-stream{
+        display: inline-block;
+        font-size: 2rem;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        margin: 0 0 1.5rem 0rem;
+        border: 2px solid gold;
+        border-radius: 2rem;
+        position: relative;
+        color: gold;
+        font-family: 'Tangerine';
+        max-width: 40rem;
+    }
+}
