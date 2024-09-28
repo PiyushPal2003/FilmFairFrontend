@@ -12,6 +12,7 @@
         height: 46rem;
         border-radius: 1.2rem;
         margin-top: 3rem;
+        max-width: 100vw;
     }
     .movie-details{
         color: white;
@@ -143,6 +144,7 @@
         .ytvid{
             width: 100vw;
             height: 48rem;
+            max-width: 100vw;
         }
         .detail-header{
             flex-direction: column;
