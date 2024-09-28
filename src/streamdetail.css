@@ -72,4 +72,9 @@
         font-family: 'Tangerine';
         max-width: 100vw;
     }
+    .video-js, .video-js .vjs-tech {
+        max-width: 100vw;
+        width: 100%;
+        height: auto;
+    }
 }
