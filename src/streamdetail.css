@@ -73,7 +73,7 @@
         position: relative;
         color: gold;
         font-family: 'Tangerine';
-        max-width: 100vw;
+        min-width: 21rem;
     }
     [data-vjs-player] {
         max-width: 100vw;
