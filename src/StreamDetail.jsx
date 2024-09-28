@@ -447,7 +447,9 @@ export default function StreamDetail() {
                 </div>
             <h1 className='det-text flimfair-users trailer' >Binge Watch Now ❤🎬</h1>
             <h1 className="detail-now-stream">FilmFair HLS Stream</h1>
-            <VideoPlayer className='ytvid' options={videoPlayerOptions} onReady={handlePlayerReady} />
+            <div className='ytvid'>
+            <VideoPlayer options={videoPlayerOptions} onReady={handlePlayerReady}/>
+            </div>
 
   
             <h1 className='det-text flimfair-users' >FilmFair Users Ratings</h1>
