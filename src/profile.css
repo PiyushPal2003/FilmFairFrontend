@@ -121,7 +121,7 @@
 .device-count-text{
     color: white;
     font-family: 'Tangerine';
-    margin: 5rem 0 0 0;
+    margin: 5rem 1.5rem 3rem 0;
     font-size: 2.6rem;
 }
 .features{
@@ -144,6 +144,13 @@
     margin: 2.3rem 2.3em 0.3rem 0.3rem;
     cursor: pointer;
 }
+.profile-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0px 0px 0px;
+    align-items: center;
+}
 @media (max-width: 500px) {
     .profile-signin-btn {
         font-size: 2.8rem;
@@ -154,5 +161,12 @@
         cursor: pointer;
         border-radius: 1.5rem;
         color: white;
+    }
+    .profile-div{
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        margin: 0px 0px 0px 0px;
+        align-items: center;
     }
 }

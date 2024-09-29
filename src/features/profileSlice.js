@@ -47,6 +47,10 @@ export const profileSlice = createSlice({
       updateProfile: (state, action)=>{
         state.profile = action.payload;
         state.auth = 'true';
+      },
+      removeProfile: (state, action)=>{
+        state.profile = {};
+        state.auth = 'false';
       }
     },
   
@@ -65,6 +69,6 @@ export const profileSlice = createSlice({
   
 //   export const selectCount = (state) => state.counter.value;
 
-  export const { updateFingerprint, updateAuth, updateProfile } = profileSlice.actions;
+  export const { updateFingerprint, updateAuth, updateProfile, removeProfile } = profileSlice.actions;
 
   export default profileSlice.reducer;

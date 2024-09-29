@@ -3,8 +3,9 @@ import './profile.css';
 import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProfile, updateFingerprint, updateAuth } from './features/profileSlice';
+import { updateProfile, updateFingerprint, updateAuth, removeProfile } from './features/profileSlice';
 import Navbar from './Navbar';
+import Swal from 'sweetalert2';
 import { CgInfo } from "react-icons/cg";
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 
@@ -150,7 +151,7 @@ export default function Profile() {
       }
   }
 
-  function signout(){      
+  function signout(){
       fetch("https://filmfairserverr.vercel.app/logoutuser", {
         method: 'POST',
         headers: {
@@ -169,9 +170,68 @@ export default function Profile() {
 
             navigate('/signin')
             dispatch(updateFingerprint(null))
-            dispatch(updateAuth())
+            dispatch(removeProfile())
           }
         })
+  }
+
+  function allsignout(){
+    fetch("https://filmfairserverr.vercel.app/logoutalluser", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'},
+        body: JSON.stringify({id: profile.data._id, fingerprint: CurrentUserFingerprint})
+    })
+    .then((res)=>{
+      if(res.ok){
+        setData((prevdata)=>({
+          ...prevdata, Devices: [CurrentUserFingerprint]
+        }))
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "SignOut Successfull",
+          showConfirmButton: false,
+          timer: 2500
+        });
+      }
+    })
+  }
+
+  function deleteaccount(){
+    Swal.fire({
+      title: "Confirm, Delete Account",
+      text: "This Action is Irreversible, Any Active Subscription will be Cancelled",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch("https://filmfairserverr.vercel.app/deleteaccount", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'},
+            body: JSON.stringify({id: profile.data._id})
+        })
+        .then((res)=>{
+          if(res.ok){
+            document.cookie = 'FilmFairRefresh' + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            if (sessionStorage.getItem('FilmFairAccess')) {
+              sessionStorage.removeItem('FilmFairAccess'); }
+            if (sessionStorage.getItem('sessionID')) {
+              sessionStorage.removeItem('sessionID'); }
+            if(sessionStorage.getItem('UserFingerprint')){
+              sessionStorage.removeItem('UserFingerprint'); }
+
+            navigate('/signup')
+            dispatch(updateFingerprint(null))
+            dispatch(removeProfile())
+          }
+        })
+      }
+    });
   }
 
     function customerprotal(custID){
@@ -278,6 +338,17 @@ export default function Profile() {
           </div>
 
           <h1 className='device-count-text'>No. of Devices Logged In with this Account: {data.Devices?.length || 1}</h1>
+          
+          <div className='profile-div'>
+            <h1 className='device-count-text'>SignOut from all other Devices?</h1>
+            <button className='profile-signin-btn' onClick={()=>{allsignout();}}>SignOut</button>
+          </div>
+          
+          <div className='profile-div'>
+            <h1 className='device-count-text'>Delete Account</h1>
+            <button className='profile-signin-btn' onClick={()=>{deleteaccount();}}>Delete Account</button>
+          </div>
+
         </div>
         </div>
         <Footer/>
