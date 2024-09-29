@@ -168,7 +168,7 @@ export default function SignUp() {
                       {...register("user_name", {
                           required: "Enter Atleast 3characters and Atmost 10characters",
                           validate: {
-                              validName: value => /^[a-zA-Z]{3,10}$/.test(value) || "Enter Atleast 3characters and Atmost 10characters"
+                              validName: value => /^[a-zA-Z]{3,10}(?: [a-zA-Z]{3,10})?$/.test(value) || "Enter Atleast 3characters and Atmost 10characters"
                           }
                       })}
                   />
@@ -196,9 +196,9 @@ export default function SignUp() {
                       type={showPassword ? 'text' : 'password'}
                       placeholder='Password'
                       {...register("user_pass", {
-                          required: "Password of max 8characters, must start with Uppercase character \n must consist of Alphabets, Numbers and Special characters",
+                          required: "Password of max 8characters, must consist of Alphabets, Numbers and Special characters",
                           validate: value =>
-                              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8}$/.test(value) ||
+                              /^(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8}$/.test(value) ||
                               "Password of max 8characters, must start with Uppercase character \n must consist of Alphabets, Numbers and Special characters"
                       })}
                   />{showPassword ? (<FaEyeSlash className="eyebtn" size={25} onClick={eyebutton} />
