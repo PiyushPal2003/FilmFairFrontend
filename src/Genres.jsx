@@ -61,7 +61,16 @@ export default function Genres() {
                                   'Content-Type': 'application/json',
                                   Authorization: `Bearer ${cookieValue}`
                                   },
-                              }).then(res=>res.json())
+                              }).then((res)=>{
+                                if(!res.ok){
+                                  console.log("Genre:: Unauthorized")
+                                  document.getElementsByClassName("genres-status")[0].style.display="flex";
+                                  document.getElementsByClassName("genres-model")[0].style.display="flex";
+                                  resolve(false);
+                                }else if(res.ok){
+                                  return res.json()
+                                }
+                              })
                             ]);
                             disdata.then((data)=>{
                                 setData(data[0].payload);
@@ -84,6 +93,7 @@ export default function Genres() {
                                         sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                         dispatch(updateFingerprint(visitorId))
                                         console.log(visitorId);
+                                        resolve(true);
                                       } else if(res.status==400){
                                         document.getElementsByClassName("genres-status")[0].style.display="flex";
                                         document.getElementsByClassName("genres-model")[0].style.display="flex";
@@ -93,8 +103,6 @@ export default function Genres() {
                                     })
                                   }
                                   setFp();
-
-                                resolve(true);
                             })  
                         }
                         catch (error) {
@@ -109,7 +117,16 @@ export default function Genres() {
                         Authorization: `Bearer ${cookieValue}`
                         },
                       })
-                      .then(res=>res.json())
+                      .then((res)=>{
+                        if(!res.ok){
+                          console.log("Genre:: Unauthorized")
+                          document.getElementsByClassName("genres-status")[0].style.display="flex";
+                          document.getElementsByClassName("genres-model")[0].style.display="flex";
+                          resolve(false);
+                        }else if(res.ok){
+                          return res.json()
+                        }
+                      })
                         .then((data)=>{
                             const setFp = async () => {
                                 const fp = await FingerprintJS.load();
@@ -127,6 +144,7 @@ export default function Genres() {
                                     sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                     dispatch(updateFingerprint(visitorId))
                                     console.log(visitorId);
+                                    resolve(true);
                                   } else if(res.status==400){
                                     document.getElementsByClassName("genres-status")[0].style.display="flex";
                                     document.getElementsByClassName("genres-model")[0].style.display="flex";
@@ -136,8 +154,6 @@ export default function Genres() {
                                 })
                               }
                             setFp();
-
-                            resolve(true);
                         })
                         setData(apidt);
                         setFilteredData(apidt);
@@ -171,7 +187,16 @@ export default function Genres() {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${checktoken}`
                         },
-                      }).then(res=>res.json())
+                      }).then((res)=>{
+                        if(!res.ok){
+                          console.log("Genre:: Unauthorized")
+                          document.getElementsByClassName("genres-status")[0].style.display="flex";
+                          document.getElementsByClassName("genres-model")[0].style.display="flex";
+                          resolve(false);
+                        }else if(res.ok){
+                          return res.json()
+                        }
+                      })
                     ]);
                     disdata.then((data)=>{
                     setData(data[0].payload);
@@ -193,6 +218,7 @@ export default function Genres() {
                                 dispatch(updateProfile({status:200, data: data[1]}))
                                 dispatch(updateFingerprint(visitorId))
                                 console.log(visitorId);
+                                resolve(true);
                               } else if(res.status==400){
                                 document.getElementsByClassName("genres-status")[0].style.display="flex";
                                 document.getElementsByClassName("genres-model")[0].style.display="flex";
@@ -202,8 +228,6 @@ export default function Genres() {
                             })
                           }
                         setFp();
-
-                        resolve(true);
                     })  
                 }
                 catch (error) {
@@ -218,7 +242,16 @@ export default function Genres() {
                 Authorization: `Bearer ${checktoken}`
                 },
               })
-              .then(res=>res.json())
+              .then((res)=>{
+                if(!res.ok){
+                  console.log("Genre:: Unauthorized")
+                  document.getElementsByClassName("genres-status")[0].style.display="flex";
+                  document.getElementsByClassName("genres-model")[0].style.display="flex";
+                  resolve(false);
+                }else if(res.ok){
+                  return res.json()
+                }
+              })
                 .then((data)=>{
                     const setFp = async () => {
                         const fp = await FingerprintJS.load();
@@ -235,6 +268,7 @@ export default function Genres() {
                             dispatch(updateProfile({status:200, data}))
                             dispatch(updateFingerprint(visitorId))
                             console.log(visitorId);
+                            resolve(true);
                           } else if(res.status==400){
                             document.getElementsByClassName("genres-status")[0].style.display="flex";
                             document.getElementsByClassName("genres-model")[0].style.display="flex";
@@ -244,8 +278,6 @@ export default function Genres() {
                         })
                       }
                     setFp();
-
-                    resolve(true);
                 })
                 setData(apidt);
                 setFilteredData(apidt);

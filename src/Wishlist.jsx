@@ -65,7 +65,16 @@ export default function Wishlist() {
                                   'Content-Type': 'application/json',
                                   Authorization: `Bearer ${cookieValue}`
                                   },
-                                }).then(res=>res.json()) //1 profile
+                                }).then((res)=>{
+                                  if(!res.ok){
+                                    console.log("Wishlist:: Unauthorized")
+                                    document.getElementsByClassName("wish-status")[0].style.display="flex";
+                                    document.getElementsByClassName("wish-model")[0].style.display="flex";
+                                    resolve(false);
+                                  }else if(res.ok){
+                                    return res.json()
+                                  }
+                                }) //1 profile
                             ]);
                             disdata.then((data)=>{
                                 profiledata=data[1];
@@ -88,6 +97,7 @@ export default function Wishlist() {
                                         sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                         dispatch(updateFingerprint(visitorId))
                                         console.log(visitorId);
+                                        resolve(true);
                                       } else if(res.status==400){
                                         document.getElementsByClassName("wish-status")[0].style.display="flex";
                                         document.getElementsByClassName("wish-model")[0].style.display="flex";
@@ -97,8 +107,6 @@ export default function Wishlist() {
                                     })
                                   }
                                 setFp();
-
-                                resolve(true);
                             })  
                         }
                         catch (error) {
@@ -112,9 +120,16 @@ export default function Wishlist() {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${cookieValue}`
                         },
-                      })
-                      .then(res=>res.json())
-                        .then((data)=>{
+                      }).then((res)=>{
+                        if(!res.ok){
+                          console.log("Wishlist:: Unauthorized")
+                          document.getElementsByClassName("wish-status")[0].style.display="flex";
+                          document.getElementsByClassName("wish-model")[0].style.display="flex";
+                          resolve(false);
+                        }else if(res.ok){
+                          return res.json()
+                        }})
+                          .then((data)=>{
                             profiledata= data;
                             setName(data)
                             const setFp = async () => {
@@ -133,6 +148,7 @@ export default function Wishlist() {
                                     sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                     dispatch(updateFingerprint(visitorId))
                                     console.log(visitorId);
+                                    resolve(true);
                                   } else if(res.status==400){
                                     document.getElementsByClassName("wish-status")[0].style.display="flex";
                                     document.getElementsByClassName("wish-model")[0].style.display="flex";
@@ -142,9 +158,7 @@ export default function Wishlist() {
                                 })
                               }
                             setFp();
-
-                            resolve(true);
-                        })
+                          })
                     }
                 }
             })
@@ -160,7 +174,16 @@ export default function Wishlist() {
                           'Content-Type': 'application/json',
                           Authorization: `Bearer ${checktoken}`
                           },
-                        }).then(res=>res.json())
+                        }).then((res)=>{
+                          if(!res.ok){
+                            console.log("Wishlist:: Unauthorized")
+                            document.getElementsByClassName("wish-status")[0].style.display="flex";
+                            document.getElementsByClassName("wish-model")[0].style.display="flex";
+                            resolve(false);
+                          }else if(res.ok){
+                            return res.json()
+                          }
+                        })
                     ]);
                     disdata.then((data)=>{
                         profiledata=data[1];
@@ -182,6 +205,7 @@ export default function Wishlist() {
                                 dispatch(updateProfile({status:200, data: data[1]}))
                                 dispatch(updateFingerprint(visitorId))
                                 console.log(visitorId);
+                                resolve(true);
                               } else if(res.status==400){
                                 document.getElementsByClassName("wish-status")[0].style.display="flex";
                                 document.getElementsByClassName("wish-model")[0].style.display="flex";
@@ -190,9 +214,7 @@ export default function Wishlist() {
                               }
                             })
                           }
-                        setFp();
-                        
-                        resolve(true);
+                        setFp(); 
                     })  
                 }
                 catch (error) {
@@ -207,7 +229,16 @@ export default function Wishlist() {
                 Authorization: `Bearer ${checktoken}`
                 },
               })
-              .then(res=>res.json())
+              .then((res)=>{
+                if(!res.ok){
+                  console.log("Wishlist:: Unauthorized")
+                  document.getElementsByClassName("wish-status")[0].style.display="flex";
+                  document.getElementsByClassName("wish-model")[0].style.display="flex";
+                  resolve(false);
+                }else if(res.ok){
+                  return res.json()
+                }
+              })
                 .then((data)=>{
                     profiledata=data;
                     setName(data)
@@ -226,6 +257,7 @@ export default function Wishlist() {
                             dispatch(updateProfile({status:200, data}))
                             dispatch(updateFingerprint(visitorId))
                             console.log(visitorId);
+                            resolve(true);
                           } else if(res.status==400){
                             document.getElementsByClassName("wish-status")[0].style.display="flex";
                             document.getElementsByClassName("wish-model")[0].style.display="flex";
@@ -235,8 +267,6 @@ export default function Wishlist() {
                         })
                       }
                     setFp();
-                    
-                    resolve(true);
                 })
             }
         }
