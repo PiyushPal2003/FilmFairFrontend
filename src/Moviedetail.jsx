@@ -84,6 +84,7 @@ export default function Moviedetail() {
                             sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                             dispatch(updateFingerprint(visitorId))
                             console.log(visitorId);
+                            resolve(true);
                           } else if(res.status==400){
                             document.getElementsByClassName("Login-status")[0].style.display = "flex";
                             document.getElementsByClassName("login-model")[0].style.display = "flex";
@@ -93,7 +94,6 @@ export default function Moviedetail() {
                         })
                       };
                       setFp();
-                    resolve(true);
                   } else{
                     document.getElementsByClassName("Login-status")[0].style.display = "flex";
                     document.getElementsByClassName("login-model")[0].style.display = "flex";
@@ -142,6 +142,7 @@ export default function Moviedetail() {
                       dispatch(updateProfile({status:200, data}))
                       dispatch(updateFingerprint(visitorId))
                       console.log(visitorId);
+                      resolve(true);
                     } else if(res.status==400){
                       document.getElementsByClassName("Login-status")[0].style.display = "flex";
                       document.getElementsByClassName("login-model")[0].style.display = "flex";
@@ -151,7 +152,6 @@ export default function Moviedetail() {
                   })
                 }
                 setFp();
-              resolve(true);
             } else {
               document.getElementsByClassName("Login-status")[0].style.display = "flex";
               document.getElementsByClassName("login-model")[0].style.display = "flex";
