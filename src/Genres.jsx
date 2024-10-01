@@ -73,9 +73,6 @@ export default function Genres() {
                               })
                             ]);
                             disdata.then((data)=>{
-                                setData(data[0].payload);
-                                setFilteredData(data[0].payload);
-                                setActiveGenre("");
 
                                 const setFp = async () => {
                                     const fp = await FingerprintJS.load();
@@ -89,6 +86,10 @@ export default function Genres() {
                                       body:JSON.stringify({visitorId, id})
                                     }).then((res)=>{
                                       if(res.status==200){
+                                        setData(data[0].payload);
+                                        setFilteredData(data[0].payload);
+                                        setActiveGenre("");
+
                                         dispatch(updateProfile({status:200, data: data[1]}))
                                         sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                         dispatch(updateFingerprint(visitorId))
@@ -140,6 +141,10 @@ export default function Genres() {
                                   body:JSON.stringify({visitorId, id})
                                 }).then((res)=>{
                                   if(res.status==200){
+                                    setData(apidt);
+                                    setFilteredData(apidt);
+                                    setActiveGenre("");
+
                                     dispatch(updateProfile({status:200, data}))
                                     sessionStorage.setItem('FilmFairAccess', splittoken[2]);
                                     dispatch(updateFingerprint(visitorId))
@@ -155,9 +160,6 @@ export default function Genres() {
                               }
                             setFp();
                         })
-                        setData(apidt);
-                        setFilteredData(apidt);
-                        setActiveGenre("");
                     }
                 }
             })
@@ -199,9 +201,6 @@ export default function Genres() {
                       })
                     ]);
                     disdata.then((data)=>{
-                    setData(data[0].payload);
-                    setFilteredData(data[0].payload);
-                    setActiveGenre("");
 
                         const setFp = async () => {
                             const fp = await FingerprintJS.load();
@@ -215,6 +214,10 @@ export default function Genres() {
                               body:JSON.stringify({visitorId, id})
                             }).then((res)=>{
                               if(res.status==200){
+                                setData(data[0].payload);
+                                setFilteredData(data[0].payload);
+                                setActiveGenre("");
+
                                 dispatch(updateProfile({status:200, data: data[1]}))
                                 dispatch(updateFingerprint(visitorId))
                                 console.log(visitorId);
@@ -265,6 +268,10 @@ export default function Genres() {
                           body:JSON.stringify({visitorId, id})
                         }).then((res)=>{
                           if(res.status==200){
+                            setData(apidt);
+                            setFilteredData(apidt);
+                            setActiveGenre("");
+                            
                             dispatch(updateProfile({status:200, data}))
                             dispatch(updateFingerprint(visitorId))
                             console.log(visitorId);
@@ -279,9 +286,6 @@ export default function Genres() {
                       }
                     setFp();
                 })
-                setData(apidt);
-                setFilteredData(apidt);
-                setActiveGenre("");
             }
           }})
         }
