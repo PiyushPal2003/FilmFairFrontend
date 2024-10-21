@@ -262,13 +262,13 @@ export default function Profile() {
       else if(auth){
         setData(profile.data);
 
-        if(profile.data.Subscription.amtPaid==900){
+        if(profile?.data?.Subscription?.amtPaid==900){
           planameRef.current.innerText = 'Basic';
           document.getElementById("features1").setAttribute("style","display:inline-block;")
-        } else if(profile.data.Subscription.amtPaid==4900){
+        } else if(profile?.data?.Subscription?.amtPaid==4900){
           planameRef.current.innerText = 'Standard';
           document.getElementById("features2").setAttribute("style","display:inline-block;")
-        } else if(profile.data.Subscription.amtPaid==9900){
+        } else if(profile?.data?.Subscription?.amtPaid==9900){
           planameRef.current.innerText = 'Premium';
           document.getElementById("features3").setAttribute("style","display:inline-block;")
         }
