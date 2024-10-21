@@ -273,7 +273,7 @@ export default function Profile() {
           document.getElementById("features3").setAttribute("style","display:inline-block;")
         }
       }
-  }, [dispatch, profile]);
+  }, [profile]);
 
   return (
     <div style={{display:"flex", flexDirection:"column", height:"100vh"}}>
